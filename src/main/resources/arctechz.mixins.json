@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "sypztep.arctechz.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "featureMerge.ItemEntityMixin",
+    "featureMerge.LivingEntityMixin"
+  ],
+  "client": [
+    "featureMerge.client.ItemEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
