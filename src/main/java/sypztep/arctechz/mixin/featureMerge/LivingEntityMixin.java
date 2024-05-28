@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.arctechz.common.init.ModTags;
 import sypztep.arctechz.common.util.ArctechzUtil;
 
 import java.util.List;
@@ -29,8 +30,10 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
+    @Shadow public abstract boolean isAlive();
+
     @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void initMergeCount(DataTracker.Builder builder,CallbackInfo ci) {
+    private void initMergeCount(DataTracker.Builder builder, CallbackInfo ci) {
         builder.add(MERGE_COUNT, 1);
     }
 
@@ -38,10 +41,10 @@ public abstract class LivingEntityMixin extends Entity {
     public void onTick(CallbackInfo ci) {
         if (!this.getWorld().isClient) {
             LivingEntity entity = (LivingEntity) (Object) this;
-            int count = entity.getDataTracker().get(MERGE_COUNT);
-            String entityName = entity.getType().getName().getString();
-            // Update custom name to always reflect current state
-            ArctechzUtil.createCustomName(count,entityName);
+
+            if (!(entity instanceof VillagerEntity)) {
+                updateCustomName(entity);
+            }
 
             List<LivingEntity> nearbyEntities = this.getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(2.0), e -> e != entity && canMerge(entity, e));
 
@@ -53,14 +56,23 @@ public abstract class LivingEntityMixin extends Entity {
             }
 
             // Ensure the custom name is updated after potential merging
-            ArctechzUtil.createCustomName(count,entityName);
+            if (!(entity instanceof VillagerEntity)) {
+                updateCustomName(entity);
+            }
         }
     }
 
     private boolean canMerge(LivingEntity entity1, LivingEntity entity2) {
-        return entity1.isAlive() && entity2.isAlive()
+        boolean basicConditions = entity1.isAlive() && entity2.isAlive()
                 && entity1.getType() == entity2.getType()
-                && entity1.distanceTo(entity2) < 2.0;
+                && entity1.distanceTo(entity2) < 2.0
+                || (entity1.isBaby() && entity2.isBaby());
+
+        return basicConditions && !blacklistMob(entity1);
+    }
+
+    private boolean blacklistMob(LivingEntity entity) {
+        return !entity.getType().isIn(ModTags.EntityTypes.BLACKLIST_MERGE_ENTITY);
     }
 
     private void mergeEntities(LivingEntity entity1, LivingEntity entity2) {
@@ -68,7 +80,7 @@ public abstract class LivingEntityMixin extends Entity {
         int count1 = entity1.getDataTracker().get(MERGE_COUNT);
         int count2 = entity2.getDataTracker().get(MERGE_COUNT);
         int totalCount = count1 + count2;
-        String entityName = entity1.getType().getName().getString();
+
         // Set the combined count to entity1
         entity1.getDataTracker().set(MERGE_COUNT, totalCount);
 
@@ -76,7 +88,17 @@ public abstract class LivingEntityMixin extends Entity {
         entity2.discard();
 
         // Update custom name to reflect the new state
-        ArctechzUtil.createCustomName(count1,entityName);
+        if (!(entity1 instanceof VillagerEntity)) {
+            updateCustomName(entity1);
+        }
+    }
+
+    @Unique
+    private void updateCustomName(LivingEntity entity) {
+        int count = entity.getDataTracker().get(MERGE_COUNT);
+        String entityName = entity.getType().getName().getString();
+        entity.setCustomName(ArctechzUtil.createCustomName(count,entityName));
+        entity.setCustomNameVisible(true);
     }
 
     @Inject(method = "onDeath", at = @At("HEAD"))
@@ -87,19 +109,23 @@ public abstract class LivingEntityMixin extends Entity {
         if (count > 1) {
             int newCount = count - 1;
             entity.getDataTracker().set(MERGE_COUNT, newCount);
-            String entityName = entity.getType().getName().getString();
 
             // Update the custom name to reflect the new count
-            ArctechzUtil.createCustomName(newCount,entityName);
+            if (!(entity instanceof VillagerEntity)) {
+                updateCustomName(entity);
+            }
 
             // Spawn a new entity to represent the remaining count
             LivingEntity newEntity = (LivingEntity) entity.getType().create(entity.getWorld());
             if (newEntity != null) {
                 newEntity.refreshPositionAndAngles(entity.getX(), entity.getY(), entity.getZ(), entity.getYaw(), entity.getPitch());
                 newEntity.getDataTracker().set(MERGE_COUNT, newCount); // Set the remaining count to the new entity
-//                newEntity.setCustomName(Text.literal(newCount + " x ")
-//                        .append(Text.literal(entity.getType().getName().getString()).formatted(Formatting.GOLD).formatted(Formatting.BOLD)));
-                ArctechzUtil.createCustomName(newCount,entityName);
+
+                if (!(newEntity instanceof VillagerEntity)) {
+                    newEntity.setCustomName(Text.literal(newCount + " x ")
+                            .append(Text.literal(entity.getType().getName().getString()).formatted(Formatting.GOLD).formatted(Formatting.BOLD)));
+                }
+
                 entity.getWorld().spawnEntity(newEntity);
             }
         }

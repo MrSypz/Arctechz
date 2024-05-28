@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.common.util.ArctechzUtil;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,12 @@ import java.util.Objects;
 public abstract class ItemEntityMixin extends Entity {
     @Shadow
     public abstract ItemStack getStack();
+
+    @Shadow public abstract int getItemAge();
+
+    @Shadow private int pickupDelay;
+
+    @Shadow private int itemAge;
 
     public ItemEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -55,7 +62,8 @@ public abstract class ItemEntityMixin extends Entity {
         ItemStack stack1 = entity1.getStack();
         ItemStack stack2 = entity2.getStack();
         return entity1.isAlive() && entity2.isAlive()
-                && ItemStack.areItemsAndComponentsEqual(stack1, stack2);
+                && ItemStack.areItemsAndComponentsEqual(stack1, stack2)
+                && entity2.isOnGround();
     }
 
     @Unique
