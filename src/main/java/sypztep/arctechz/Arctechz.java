@@ -4,6 +4,7 @@ import eu.midnightdust.core.config.MidnightConfigExample;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
+import sypztep.arctechz.common.init.ModCustomPayload;
 
 public class Arctechz implements ModInitializer {
     public static final String MODID = "arctechz";
@@ -13,5 +14,6 @@ public class Arctechz implements ModInitializer {
     @Override
     public void onInitialize() {
         MidnightConfig.init("arctechz", ModConfig.class);
+        ModCustomPayload.init();
     }
 }

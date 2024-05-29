@@ -12,6 +12,9 @@
   "icon": "assets/arctechz/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "sypztep.arctechz.client.ArctechzClient"
+    ],
     "main": [
       "sypztep.arctechz.Arctechz"
     ],

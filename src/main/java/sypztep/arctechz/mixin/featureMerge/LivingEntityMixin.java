@@ -74,6 +74,7 @@ public abstract class LivingEntityMixin extends Entity {
                 && entity1.getType() == entity2.getType()
                 && entity1.distanceTo(entity2) < MERGE_RADIUS
                 && (entity1.isBaby() == entity2.isBaby())
+                && !(entity1 instanceof PlayerEntity)
                 && !isBlacklisted(entity1);
     }
 

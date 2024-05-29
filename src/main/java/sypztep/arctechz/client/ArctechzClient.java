@@ -1,4 +1,9 @@
 package sypztep.arctechz.client;
 
-public class ArctechzClient {
+import net.fabricmc.api.ClientModInitializer;
+
+public class ArctechzClient implements ClientModInitializer {
+    @Override
+    public void onInitializeClient() {
+    }
 }

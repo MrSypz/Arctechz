@@ -1,5 +1,6 @@
 package sypztep.arctechz.mixin.featureMerge;
 
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.common.util.ArctechzUtil;
-import sypztep.arctechz.mixin.featureMerge.util.ItemEntityAccessor;
+import sypztep.arctechz.mixin.util.ItemEntityAccessor;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ import java.util.List;
 public abstract class ItemEntityMixin extends Entity {
 
     @Shadow private int pickupDelay;
+
+    @Shadow public abstract void setStack(ItemStack stack);
+
     @Unique
     private static final float RANGE = 1.5f;
 
@@ -76,6 +80,7 @@ public abstract class ItemEntityMixin extends Entity {
         // If not merged after retries, set the count directly
         if (!merged) {
             if (totalAmount <= ModConfig.stackSize) {
+                this.setStack(stack2);
                 stack2.setCount(totalAmount);
                 entity1.discard();
             } else {

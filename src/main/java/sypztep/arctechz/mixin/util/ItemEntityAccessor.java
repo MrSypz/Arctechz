@@ -1,4 +1,4 @@
-package sypztep.arctechz.mixin.featureMerge.util;
+package sypztep.arctechz.mixin.util;
 
 import net.minecraft.entity.ItemEntity;
 import org.spongepowered.asm.mixin.Mixin;

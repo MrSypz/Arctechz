@@ -4,9 +4,10 @@
   "package": "sypztep.arctechz.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "featureMerge.HopperBlockEntityMixin",
     "featureMerge.ItemEntityMixin",
     "featureMerge.LivingEntityMixin",
-    "featureMerge.util.ItemEntityAccessor"
+    "util.ItemEntityAccessor"
   ],
   "client": [
     "featureMerge.client.ItemEntityRendererMixin"
