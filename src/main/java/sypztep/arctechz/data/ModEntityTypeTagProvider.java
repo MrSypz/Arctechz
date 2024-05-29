@@ -20,8 +20,11 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
 		getOrCreateTagBuilder(ModTags.EntityTypes.BLACKLIST_MERGE_ENTITY)
 				.addOptionalTag(ConventionalEntityTypeTags.BOATS)
 				.addOptionalTag(ConventionalEntityTypeTags.MINECARTS)
+				.addOptionalTag(ConventionalEntityTypeTags.BOSSES)
 				.add(EntityType.END_CRYSTAL)
 				.add(EntityType.ARMOR_STAND)
+				.add(EntityType.HORSE)
+				.add(EntityType.DONKEY)
 				.add(EntityType.VILLAGER);
 	}
 }

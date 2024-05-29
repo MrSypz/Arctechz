@@ -9,12 +9,13 @@
       "required": false
     },
     {
-      "id": "#c:teleporting_not_supported",
+      "id": "#c:bosses",
       "required": false
     },
     "minecraft:end_crystal",
     "minecraft:armor_stand",
-    "minecraft:player",
+    "minecraft:horse",
+    "minecraft:donkey",
     "minecraft:villager"
   ]
 }
