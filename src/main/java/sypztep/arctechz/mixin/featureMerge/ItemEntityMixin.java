@@ -1,6 +1,6 @@
 package sypztep.arctechz.mixin.featureMerge;
 
-import net.minecraft.component.DataComponentTypes;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.common.util.ArctechzUtil;
@@ -18,15 +19,15 @@ import sypztep.arctechz.mixin.util.ItemEntityAccessor;
 
 import java.util.List;
 
+import static net.minecraft.entity.ItemEntity.merge;
+
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 
-    @Shadow private int pickupDelay;
-
-    @Shadow public abstract void setStack(ItemStack stack);
-
+    @Shadow
+    private int pickupDelay;
     @Unique
-    private static final float RANGE = 1.5f;
+    private static final float RANGE = ModConfig.mergeRange;
 
     public ItemEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -47,7 +48,6 @@ public abstract class ItemEntityMixin extends Entity {
                     break; // Exit after merging to prevent excessive merges in one tick
                 }
             }
-
             updateCustomName((ItemEntity) (Object) this);
         }
     }
@@ -58,7 +58,21 @@ public abstract class ItemEntityMixin extends Entity {
         ItemStack stack2 = entity2.getStack();
         return entity1.isAlive() && entity2.isAlive()
                 && ItemStack.areItemsAndComponentsEqual(stack1, stack2)
-                && this.pickupDelay != 32767 && entity2.getItemAge() != -32768 && entity2.getItemAge() < 6000;
+                && this.pickupDelay != 32767 && entity1.getItemAge() != -32768 && entity1.getItemAge() < 6000;
+    }
+
+    @Unique
+    private static ItemStack merge(ItemStack stack1, ItemStack stack2, int maxCount) {
+        int i = Math.min(Math.min(ModConfig.stackSize, maxCount) - stack1.getCount(), stack2.getCount());
+        ItemStack itemStack = stack1.copyWithCount(stack1.getCount() + i);
+        stack2.decrement(i);
+        return itemStack;
+    }
+
+    @Unique
+    private static void merge(ItemEntity targetEntity, ItemStack stack1, ItemStack stack2) {
+        ItemStack itemStack = merge(stack1, stack2, ModConfig.stackSize);
+        targetEntity.setStack(itemStack);
     }
 
     @Unique
@@ -67,32 +81,18 @@ public abstract class ItemEntityMixin extends Entity {
         ItemStack stack2 = entity2.getStack();
         int totalAmount = stack1.getCount() + stack2.getCount();
 
-        // Try merging a few times
-        boolean merged = false;
-        for (int i = 0; i < 3; i++) {  // Number of retry attempts
-            ((ItemEntityAccessor) entity2).arctechz$tryMerge(entity1);
-            if (!entity2.isAlive()) {  // Check if entity1 was merged and discarded
-                merged = true;
-                break;
-            }
-        }
-
-        // If not merged after retries, set the count directly
-        if (!merged) {
-            if (totalAmount <= ModConfig.stackSize) {
-                this.setStack(stack2);
-                stack2.setCount(totalAmount);
-                entity1.discard();
-            } else {
-                int remainder = totalAmount - ModConfig.stackSize;
-                stack2.setCount(ModConfig.stackSize);
-                stack1.setCount(remainder);
-                updateCustomName(entity1); // Update the custom name of the remaining entity
-            }
+        if (totalAmount <= ModConfig.stackSize) {
+            merge(entity2, stack2, stack1);
+        } else {
+            int remainder = totalAmount - ModConfig.stackSize;
+            stack2.setCount(ModConfig.stackSize);
+            stack1.setCount(remainder);
+            updateCustomName(entity1); // Update the custom name of the remaining entity
         }
         updateCustomName(entity2);
     }
-    @Inject(method = "tryMerge()V" , at = @At("HEAD"), cancellable = true)
+
+    @Inject(method = "tryMerge()V", at = @At("HEAD"), cancellable = true)
     private void disableVanillaMerge(CallbackInfo ci) {
         ci.cancel();
     }
