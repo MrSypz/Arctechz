@@ -11,16 +11,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.common.util.ArctechzUtil;
-import sypztep.arctechz.mixin.util.ItemEntityAccessor;
 
 import java.util.List;
-
-import static net.minecraft.entity.ItemEntity.merge;
-
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 

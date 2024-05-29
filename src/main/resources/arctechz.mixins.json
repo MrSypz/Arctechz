@@ -6,8 +6,7 @@
   "mixins": [
     "featureMerge.HopperBlockEntityMixin",
     "featureMerge.ItemEntityMixin",
-    "featureMerge.LivingEntityMixin",
-    "util.ItemEntityAccessor"
+    "featureMerge.LivingEntityMixin"
   ],
   "client": [
     "featureMerge.client.ItemEntityRendererMixin"

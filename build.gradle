@@ -20,7 +20,13 @@ repositories {
         url = "https://maven.terraformersmc.com/"
     }
     maven {
-        url = "https://api.modrinth.com/maven"
+        name = 'Ladysnake Mods'
+        url = 'https://maven.ladysnake.org/releases'
+        content {
+            includeGroup 'io.github.ladysnake'
+            includeGroup 'org.ladysnake'
+            includeGroupByRegex 'dev\\.onyxstudios.*'
+        }
     }
 }
 fabricApi {
@@ -40,6 +46,9 @@ dependencies {
 
     modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
+
+    modImplementation include ("org.ladysnake:satin:${satin_version}")
+    // Include Satin as a Jar-in-Jar dependency (optional)
 }
 
 processResources {
