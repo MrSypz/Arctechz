@@ -23,6 +23,7 @@ public class ModEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagPro
 				.addOptionalTag(ConventionalEntityTypeTags.TELEPORTING_NOT_SUPPORTED)
 				.add(EntityType.END_CRYSTAL)
 				.add(EntityType.ARMOR_STAND)
+				.add(EntityType.PLAYER)
 				.add(EntityType.VILLAGER);
 	}
 }
