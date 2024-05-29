@@ -5,6 +5,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Vector3f;
 import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.feature.ArctechzFeature;
 
@@ -13,6 +14,10 @@ public class BigHaloModel extends OverheadModel {
 
 	public BigHaloModel(EntityRendererFactory.Context ctx) {
 		super(ctx, MODEL_LAYER);
+
+		ModelPart bigHalo = this.head.getChild("big_halo");
+		Vector3f vector3f = new Vector3f(-0.25f);
+		bigHalo.scale(vector3f);
 	}
 
 	public static TexturedModelData getTexturedModelData() {

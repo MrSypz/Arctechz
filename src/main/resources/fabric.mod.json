@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "Arctechz",
   "description": "",
-  "authors": [],
+  "authors": [
+    "Sypztep"
+  ],
   "contact": {
     "repo": "https://github.com/Mrsypz/Arctechz"
   },
