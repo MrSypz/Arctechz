@@ -1,4 +1,4 @@
-package sypztep.arctechz.feature.render.feature;
+package sypztep.arctechz.client.feature.render.feature;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -9,10 +9,9 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import sypztep.arctechz.feature.ArctechzFeature;
-import sypztep.arctechz.feature.data.PlayerCosmeticData;
-import sypztep.arctechz.feature.render.model.hat.OverheadModel;
-import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
+import sypztep.arctechz.client.feature.ArctechzFeature;
+import sypztep.arctechz.client.feature.render.model.hat.OverheadModel;
+import sypztep.arctechz.client.feature.render.renderer.GlowyRenderLayer;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 		if (!entity.isInvisible()) {
 //			String playerOverhead = cosmeticData.getOverhead();
 //			if (playerOverhead != null) {
-				ResolvedOverheadData resolvedOverheadData = this.models.get("hanega_halo");
+				ResolvedOverheadData resolvedOverheadData = this.models.get("redsight");
 				if (resolvedOverheadData != null) {
 					Identifier texture = resolvedOverheadData.texture();
 					OverheadModel model = resolvedOverheadData.model();

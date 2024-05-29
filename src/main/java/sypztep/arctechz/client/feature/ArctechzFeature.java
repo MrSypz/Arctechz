@@ -1,4 +1,4 @@
-package sypztep.arctechz.feature;
+package sypztep.arctechz.client.feature;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
@@ -13,10 +13,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
-import sypztep.arctechz.feature.data.OverheadData;
-import sypztep.arctechz.feature.data.PlayerCosmeticData;
-import sypztep.arctechz.feature.render.feature.OverheadFeatureRenderer;
-import sypztep.arctechz.feature.render.model.hat.BigHaloModel;
+import sypztep.arctechz.client.feature.data.OverheadData;
+import sypztep.arctechz.client.feature.data.PlayerCosmeticData;
+import sypztep.arctechz.client.feature.render.feature.OverheadFeatureRenderer;
+import sypztep.arctechz.client.feature.render.model.hat.BigHaloModel;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class ArctechzFeature implements ClientModInitializer {
     // feature cosmetics
     private static final String COSMETICS_URL = "https://mrsypz.github.io/sypztep.github.io/uuidfeature.json";
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
-    private static Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
+    private static final Map<UUID, PlayerCosmeticData> PLAYER_COSMETICS = Collections.emptyMap();
 
     public static @Nullable PlayerCosmeticData getCosmeticData(PlayerEntity player) {
         return PLAYER_COSMETICS.get(player.getUuid());
@@ -53,6 +53,7 @@ public class ArctechzFeature implements ClientModInitializer {
 
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("hanega_halo", new OverheadData(BigHaloModel::new, "hanega_halo"))
+                .put("redsight", new OverheadData(BigHaloModel::new, "redsight"))
                 .build();
 
     }

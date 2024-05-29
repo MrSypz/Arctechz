@@ -16,13 +16,16 @@
   "entrypoints": {
     "client": [
       "sypztep.arctechz.client.ArctechzClient",
-      "sypztep.arctechz.feature.ArctechzFeature"
+      "sypztep.arctechz.client.feature.ArctechzFeature"
     ],
     "main": [
       "sypztep.arctechz.Arctechz"
     ],
     "fabric-datagen": [
       "sypztep.arctechz.data.ModDataGenerator"
+    ],
+    "cardinal-components-entity": [
+      "sypztep.arctechz.common.init.ModEntityComponents"
     ]
   },
   "mixins": [
@@ -32,5 +35,10 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "cardinal-components": [
+      "arctechz:backweapon"
+    ]
   }
 }

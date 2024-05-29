@@ -4,12 +4,22 @@
   "package": "sypztep.arctechz.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "backslot.PlayerInventoryMixin",
+    "backslot.PlayerScreenHandlerMixin",
+    "backslot.ServerPlayNetworkHandlerMixin",
     "featureMerge.HopperBlockEntityMixin",
     "featureMerge.ItemEntityMixin",
     "featureMerge.LivingEntityMixin"
   ],
   "client": [
-    "featureMerge.client.ItemEntityRendererMixin"
+    "backslot.client.CreativeInventoryScreenMixin",
+    "backslot.client.HandledScreenMixin",
+    "backslot.client.InGameHudMixin",
+    "backslot.client.InventoryScreenMixin",
+    "backslot.client.MinecraftClientMixin",
+    "backslot.client.PlayerEntityRendererMixin",
+    "featureMerge.client.ItemEntityRendererMixin",
+    "util.CreativeSlotAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

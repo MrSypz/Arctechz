@@ -1,4 +1,4 @@
-package sypztep.arctechz.feature.render.renderer;
+package sypztep.arctechz.client.feature.render.renderer;
 
 import ladysnake.satin.mixin.client.render.RenderLayerAccessor;
 import net.minecraft.client.render.RenderLayer;

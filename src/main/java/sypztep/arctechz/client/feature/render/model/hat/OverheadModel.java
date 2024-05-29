@@ -1,16 +1,12 @@
-package sypztep.arctechz.feature.render.model.hat;
+package sypztep.arctechz.client.feature.render.model.hat;
 
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
-
-import java.util.function.Function;
+import sypztep.arctechz.client.feature.render.renderer.GlowyRenderLayer;
 
 public abstract class OverheadModel extends Model {
 	public final ModelPart head;
