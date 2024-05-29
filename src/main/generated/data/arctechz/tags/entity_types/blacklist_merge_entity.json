@@ -1,0 +1,19 @@
+{
+  "values": [
+    {
+      "id": "#c:boats",
+      "required": false
+    },
+    {
+      "id": "#c:minecarts",
+      "required": false
+    },
+    {
+      "id": "#c:teleporting_not_supported",
+      "required": false
+    },
+    "minecraft:end_crystal",
+    "minecraft:armor_stand",
+    "minecraft:villager"
+  ]
+}

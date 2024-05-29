@@ -38,7 +38,7 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
         if (!this.getWorld().isClient) {
-            List<ItemEntity> list = this.getWorld().getEntitiesByClass(ItemEntity.class, this.getBoundingBox().expand(1.5, 0.0, 1.5), (otherItemEntity) -> true);
+            List<ItemEntity> list = this.getWorld().getEntitiesByClass(ItemEntity.class, this.getBoundingBox().expand(1.5, 0.5, 1.5), (otherItemEntity) -> true);
             ItemStack stack = this.getStack();
             String itemName = stack.getName().getString();
 
@@ -63,7 +63,7 @@ public abstract class ItemEntityMixin extends Entity {
         ItemStack stack2 = entity2.getStack();
         return entity1.isAlive() && entity2.isAlive()
                 && ItemStack.areItemsAndComponentsEqual(stack1, stack2)
-                && entity2.isOnGround();
+                && this.pickupDelay != 32767 && this.itemAge != -32768 && this.itemAge < 6000;
     }
 
     @Unique

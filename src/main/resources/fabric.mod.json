@@ -14,6 +14,9 @@
   "entrypoints": {
     "main": [
       "sypztep.arctechz.Arctechz"
+    ],
+    "fabric-datagen": [
+      "sypztep.arctechz.data.ModDataGenerator"
     ]
   },
   "mixins": [

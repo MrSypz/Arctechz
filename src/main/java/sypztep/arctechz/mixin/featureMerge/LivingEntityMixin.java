@@ -68,13 +68,15 @@ public abstract class LivingEntityMixin extends Entity {
                 && entity1.distanceTo(entity2) < 2.0
                 || (entity1.isBaby() && entity2.isBaby());
 
-        return basicConditions && !blacklistMob(entity1);
+        return basicConditions && blacklistMob(entity1);
     }
 
+    @Unique
     private boolean blacklistMob(LivingEntity entity) {
         return !entity.getType().isIn(ModTags.EntityTypes.BLACKLIST_MERGE_ENTITY);
     }
 
+    @Unique
     private void mergeEntities(LivingEntity entity1, LivingEntity entity2) {
         // Combine the merge counts
         int count1 = entity1.getDataTracker().get(MERGE_COUNT);
