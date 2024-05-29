@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "featureMerge.ItemEntityMixin",
-    "featureMerge.LivingEntityMixin"
+    "featureMerge.LivingEntityMixin",
+    "featureMerge.util.ItemEntityAccessor"
   ],
   "client": [
     "featureMerge.client.ItemEntityRendererMixin"
