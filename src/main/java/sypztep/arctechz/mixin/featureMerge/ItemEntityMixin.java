@@ -66,8 +66,8 @@ public abstract class ItemEntityMixin extends Entity {
         // Try merging a few times
         boolean merged = false;
         for (int i = 0; i < 3; i++) {  // Number of retry attempts
-            ((ItemEntityAccessor) entity1).arctechz$tryMerge(entity2);
-            if (!entity1.isAlive()) {  // Check if entity1 was merged and discarded
+            ((ItemEntityAccessor) entity2).arctechz$tryMerge(entity1);
+            if (!entity2.isAlive()) {  // Check if entity1 was merged and discarded
                 merged = true;
                 break;
             }
