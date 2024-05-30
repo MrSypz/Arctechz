@@ -1,4 +1,4 @@
-package sypztep.arctechz.common.interfaces;
+package sypztep.arctechz.common.util;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

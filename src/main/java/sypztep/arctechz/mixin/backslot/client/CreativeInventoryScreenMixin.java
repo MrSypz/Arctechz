@@ -31,7 +31,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     }
 
     @WrapOperation(method = {"setSelectedTab"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/util/collection/DefaultedList;add(Ljava/lang/Object;)Z", ordinal = 2)})
-    private boolean mamy$moveWeaponSlot(DefaultedList<Slot> slots, Object object, Operation<Boolean> operation) {
+    private boolean moveWeaponSlot(DefaultedList<Slot> slots, Object object, Operation<Boolean> operation) {
         if (object instanceof CreativeInventoryScreen.CreativeSlot newSlot) {
             Slot slot = ((CreativeSlotAccessor) newSlot).getSlot();
             if (slot instanceof WeaponSlot) {
@@ -44,7 +44,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     }
 
     @Inject(method = {"drawBackground"}, at = {@At("TAIL")})
-    private void mamy$drawSlots(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
+    private void drawSlots(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
         if (selectedTab.getType() == ItemGroup.Type.INVENTORY) {
             int i = this.x + 126;
             int j = this.y + 19;

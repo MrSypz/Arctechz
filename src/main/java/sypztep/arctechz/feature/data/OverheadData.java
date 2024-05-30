@@ -1,9 +1,9 @@
-package sypztep.arctechz.client.feature.data;
+package sypztep.arctechz.feature.data;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
-import sypztep.arctechz.client.feature.ArctechzFeature;
-import sypztep.arctechz.client.feature.render.model.hat.OverheadModel;
+import sypztep.arctechz.feature.ArctechzFeature;
+import sypztep.arctechz.feature.render.model.hat.OverheadModel;
 
 import java.util.function.Function;
 

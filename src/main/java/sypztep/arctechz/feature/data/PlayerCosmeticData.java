@@ -1,4 +1,4 @@
-package sypztep.arctechz.client.feature.data;
+package sypztep.arctechz.feature.data;
 
 import com.google.gson.JsonElement;
 

@@ -8,19 +8,21 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.arctechz.client.payload.HandleDropSlotPayload;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
 
 @Mixin({ServerPlayNetworkHandler.class})
 public class ServerPlayNetworkHandlerMixin {
-    @Shadow public ServerPlayerEntity player;
+    @Shadow
+    public ServerPlayerEntity player;
 
-    @Inject(
-            method = {"onPlayerAction"},
-            at = {@At("HEAD")}
-    )
-    private void mamy$swapHands(PlayerActionC2SPacket packet, CallbackInfo ci) {
+    @Inject(method = {"onPlayerAction"}, at = {@At("HEAD")}, cancellable = true)
+    private void swapHands(PlayerActionC2SPacket packet, CallbackInfo ci) {
         if (packet.getAction() == PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND) {
             BackWeaponComponent.setHoldingBackWeapon(this.player, false);
+        } else if (packet.getAction() == PlayerActionC2SPacket.Action.DROP_ITEM && BackWeaponComponent.isHoldingBackWeapon(player)) {
+            HandleDropSlotPayload.send(this.player);
+            ci.cancel();
         }
     }
 }

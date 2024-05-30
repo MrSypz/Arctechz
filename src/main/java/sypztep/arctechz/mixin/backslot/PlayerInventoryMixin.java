@@ -12,18 +12,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
+import sypztep.arctechz.common.util.WeaponSlotHolder;
 
 @Mixin({PlayerInventory.class})
+public class PlayerInventoryMixin{
+    @Shadow
+    @Final
+    public PlayerEntity player;
 
-public class PlayerInventoryMixin {
-    @Shadow @Final public PlayerEntity player;
-
-    @Inject(
-            method = {"getMainHandStack"},
-            at = {@At("HEAD")},
-            cancellable = true
-    )
-    private void mamy$mainHandSlot(CallbackInfoReturnable<ItemStack> cir) {
+    @Inject(method = {"getMainHandStack"}, at = {@At("HEAD")}, cancellable = true)
+    private void mainHandSlot(CallbackInfoReturnable<ItemStack> cir) {
         if (BackWeaponComponent.isHoldingBackWeapon(this.player)) {
             if (!BackWeaponComponent.getBackWeapon(this.player).isEmpty()) {
                 cir.setReturnValue(BackWeaponComponent.getBackWeapon(this.player));
@@ -34,23 +32,16 @@ public class PlayerInventoryMixin {
 
     }
 
-    @Inject(
-            method = {"updateItems"},
-            at = {@At("TAIL")}
-    )
-    private void mamy$selectSlot(CallbackInfo ci) {
+    @Inject(method = {"updateItems"}, at = {@At("TAIL")})
+    private void selectSlot(CallbackInfo ci) {
         if (!BackWeaponComponent.getBackWeapon(this.player).isEmpty()) {
             BackWeaponComponent.getBackWeapon(this.player).inventoryTick(this.player.getWorld(), this.player, 0, BackWeaponComponent.isHoldingBackWeapon(this.player));
         }
 
     }
 
-    @Inject(
-            method = {"getBlockBreakingSpeed"},
-            at = {@At("HEAD")},
-            cancellable = true
-    )
-    private void mamy$slotBreaking(BlockState block, CallbackInfoReturnable<Float> cir) {
+    @Inject(method = {"getBlockBreakingSpeed"}, at = {@At("HEAD")}, cancellable = true)
+    private void slotBreaking(BlockState block, CallbackInfoReturnable<Float> cir) {
         if (BackWeaponComponent.isHoldingBackWeapon(this.player)) {
             if (!BackWeaponComponent.getBackWeapon(this.player).isEmpty()) {
                 cir.setReturnValue(BackWeaponComponent.getBackWeapon(this.player).getMiningSpeedMultiplier(block));
@@ -58,30 +49,20 @@ public class PlayerInventoryMixin {
                 BackWeaponComponent.setHoldingBackWeapon(this.player, false);
             }
         }
-
     }
 
-    @Inject(
-            method = {"addPickBlock"},
-            at = {@At("HEAD")}
-    )
-    private void mamy$nonPick(CallbackInfo ci) {
+    @Inject(method = {"addPickBlock"}, at = {@At("HEAD")})
+    private void nonPick(CallbackInfo ci) {
         BackWeaponComponent.setHoldingBackWeapon(this.player, false);
     }
 
-    @Inject(
-            method = {"swapSlotWithHotbar"},
-            at = {@At("HEAD")}
-    )
-    private void mamy$nonSwap(int slot, CallbackInfo ci) {
+    @Inject(method = {"swapSlotWithHotbar"}, at = {@At("HEAD")})
+    private void nonSwap(int slot, CallbackInfo ci) {
         BackWeaponComponent.setHoldingBackWeapon(this.player, false);
     }
 
-    @Inject(
-            method = {"scrollInHotbar"},
-            at = {@At("HEAD")}
-    )
-    private void mamy$nonScroll(double scrollAmount, CallbackInfo ci) {
+    @Inject(method = {"scrollInHotbar"}, at = {@At("HEAD")})
+    private void nonScroll(double scrollAmount, CallbackInfo ci) {
         BackWeaponComponent.setHoldingBackWeapon(this.player, false);
     }
 }

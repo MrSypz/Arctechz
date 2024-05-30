@@ -1,4 +1,4 @@
-package sypztep.arctechz.client.feature.render.feature;
+package sypztep.arctechz.feature.render.feature;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -9,9 +9,9 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import sypztep.arctechz.client.feature.ArctechzFeature;
-import sypztep.arctechz.client.feature.render.model.hat.OverheadModel;
-import sypztep.arctechz.client.feature.render.renderer.GlowyRenderLayer;
+import sypztep.arctechz.feature.ArctechzFeature;
+import sypztep.arctechz.feature.render.model.hat.OverheadModel;
+import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
 
 import java.util.Map;
 import java.util.stream.Collectors;

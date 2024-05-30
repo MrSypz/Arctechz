@@ -11,7 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
-import sypztep.arctechz.common.interfaces.WeaponSlotCallback;
+import sypztep.arctechz.common.util.WeaponSlotCallback;
 
 public class BackWeaponFeatureRenderer extends HeldItemFeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
     private final HeldItemRenderer heldItemRenderer;

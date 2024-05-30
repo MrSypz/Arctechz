@@ -1,14 +1,11 @@
 package sypztep.arctechz.common.component.entity;
 
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.TridentItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import sypztep.arctechz.client.ArctechzClient;
 import sypztep.arctechz.common.init.ModEntityComponents;
 import sypztep.arctechz.common.payload.HoldWeaponPayload;
 
@@ -59,7 +56,7 @@ public class BackWeaponComponent implements AutoSyncedComponent {
         return ModEntityComponents.BACK_WEAPON_COMPONENT.get(player).getBackWeaponInventory();
     }
 
-    public boolean isHoldingBackWeapon() {
+    private boolean isHoldingBackWeapon() {
         return this.holdingBackWeapon;
     }
 

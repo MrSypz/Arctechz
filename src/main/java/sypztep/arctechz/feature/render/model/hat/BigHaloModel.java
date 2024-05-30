@@ -1,10 +1,10 @@
-package sypztep.arctechz.client.feature.render.model.hat;
+package sypztep.arctechz.feature.render.model.hat;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import org.joml.Vector3f;
-import sypztep.arctechz.client.feature.ArctechzFeature;
+import sypztep.arctechz.feature.ArctechzFeature;
 
 public class BigHaloModel extends OverheadModel {
 	public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(ArctechzFeature.id("big_halo"), "main");
