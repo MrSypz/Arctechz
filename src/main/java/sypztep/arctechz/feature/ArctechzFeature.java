@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -17,6 +18,7 @@ import sypztep.arctechz.feature.data.OverheadData;
 import sypztep.arctechz.feature.data.PlayerCosmeticData;
 import sypztep.arctechz.feature.render.feature.OverheadFeatureRenderer;
 import sypztep.arctechz.feature.render.model.hat.BigHaloModel;
+import sypztep.arctechz.feature.render.model.hat.FurinaHatModel;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -43,6 +45,7 @@ public class ArctechzFeature implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityModelLayerRegistry.registerModelLayer(BigHaloModel.MODEL_LAYER, BigHaloModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(FurinaHatModel.MODEL_LAYER, FurinaHatModel::getTexturedModelData);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
@@ -54,6 +57,7 @@ public class ArctechzFeature implements ClientModInitializer {
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("hanega_halo", new OverheadData(BigHaloModel::new, "hanega_halo"))
                 .put("redsight", new OverheadData(BigHaloModel::new, "redsight"))
+                .put("furina_hat", new OverheadData(FurinaHatModel::new, "furina_hat"))
                 .build();
 
     }

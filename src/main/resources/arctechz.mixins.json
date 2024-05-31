@@ -4,12 +4,9 @@
   "package": "sypztep.arctechz.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "backslot.PersistentProjectileEntityMixin",
     "backslot.PlayerInventoryMixin",
     "backslot.PlayerScreenHandlerMixin",
-    "backslot.ProjectileEntityMixin",
     "backslot.ServerPlayNetworkHandlerMixin",
-    "backslot.TridentItemMixin",
     "featureMerge.HopperBlockEntityMixin",
     "featureMerge.ItemEntityMixin",
     "featureMerge.LivingEntityMixin"

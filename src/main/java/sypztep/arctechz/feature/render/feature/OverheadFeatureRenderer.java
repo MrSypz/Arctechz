@@ -31,7 +31,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 		if (!entity.isInvisible()) {
 //			String playerOverhead = cosmeticData.getOverhead();
 //			if (playerOverhead != null) {
-				ResolvedOverheadData resolvedOverheadData = this.models.get("redsight");
+				ResolvedOverheadData resolvedOverheadData = this.models.get("furina_hat");
 				if (resolvedOverheadData != null) {
 					Identifier texture = resolvedOverheadData.texture();
 					OverheadModel model = resolvedOverheadData.model();

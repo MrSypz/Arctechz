@@ -18,7 +18,6 @@ public class Arctechz implements ModInitializer {
     @Override
     public void onInitialize() {
         MidnightConfig.init("arctechz", ModConfig.class);
-        ModCustomPayload.init();
         initPayloads();
     }
     private void initPayloads() {

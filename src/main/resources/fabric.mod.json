@@ -16,7 +16,7 @@
   "entrypoints": {
     "client": [
       "sypztep.arctechz.client.ArctechzClient",
-      "sypztep.arctechz.client.feature.ArctechzFeature"
+      "sypztep.arctechz.feature.ArctechzFeature"
     ],
     "main": [
       "sypztep.arctechz.Arctechz"
