@@ -4,7 +4,7 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class ModConfig extends MidnightConfig {
     @Entry
-    public static boolean featureMerge = true;
+    public static boolean featureMerge = false;
     @Entry
     public static int stackSize = 2048;
     @Entry(category = "client", min = 1)
@@ -19,8 +19,7 @@ public class ModConfig extends MidnightConfig {
     }
 
     public static int encode() {
-        StringBuilder builder = new StringBuilder();
-        String encoding = builder.toString() + featureMerge;
+        String encoding = "" + featureMerge;
         return encoding.hashCode();
     }
 

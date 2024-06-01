@@ -10,7 +10,7 @@ import sypztep.arctechz.common.init.ModEntityComponents;
 import sypztep.arctechz.common.payload.HoldWeaponPayload;
 
 public class BackWeaponComponent implements AutoSyncedComponent {
-    private final PlayerEntity obj;
+        private final PlayerEntity obj;
     private final SimpleInventory backWeapon = new SimpleInventory(1);
     private boolean holdingBackWeapon = false;
 
