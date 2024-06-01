@@ -3,9 +3,13 @@ package sypztep.arctechz;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
+import sypztep.arctechz.client.event.SendPatchNoteEvent;
+import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
+import sypztep.arctechz.client.payload.PatchNotePayload;
 import sypztep.arctechz.common.payload.HoldWeaponPayload;
 import sypztep.arctechz.common.payload.SwapInvPayload;
 import sypztep.arctechz.common.payload.SwapWeaponPayload;
@@ -17,11 +21,15 @@ public class Arctechz implements ModInitializer {
     }
     @Override
     public void onInitialize() {
-        MidnightConfig.init("arctechz", ModConfig.class);
+        MidnightConfig.init(MODID, ModConfig.class);
         initPayloads();
     }
     private void initPayloads() {
+        ServerPlayConnectionEvents.JOIN.register(new SendPatchNoteEvent());
+
         PayloadTypeRegistry.playS2C().register(HandleDropSlotPayload.ID, HandleDropSlotPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(PatchNotePayload.ID, PatchNotePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(EnforceConfigMatchPayload.ID, EnforceConfigMatchPayload.CODEC);
 
         PayloadTypeRegistry.playC2S().register(HoldWeaponPayload.ID, HoldWeaponPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(SwapInvPayload.ID, SwapInvPayload.CODEC);

@@ -1,6 +1,5 @@
 package sypztep.arctechz.mixin.featureMerge;
 
-import com.terraformersmc.modmenu.util.mod.Mod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -30,7 +29,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
-        if (!ModConfig.featuerMerge)
+        if (!ModConfig.featureMerge)
             return;
         if (!this.getWorld().isClient) {
             List<ItemEntity> nearbyItems = this.getWorld().getEntitiesByClass(
@@ -50,7 +49,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
     @Inject(method = "tryMerge()V", at = @At("HEAD"), cancellable = true)
     private void disableVanillaMerge(CallbackInfo ci) {
-        if (!ModConfig.featuerMerge)
+        if (!ModConfig.featureMerge)
             return;
         ci.cancel();
     }

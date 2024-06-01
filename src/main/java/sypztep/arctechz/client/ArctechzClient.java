@@ -11,7 +11,9 @@ import net.minecraft.util.ActionResult;
 import org.lwjgl.glfw.GLFW;
 import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.client.event.ClientHandleTick;
+import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
+import sypztep.arctechz.client.payload.PatchNotePayload;
 import sypztep.arctechz.common.util.WeaponSlotCallback;
 
 public class ArctechzClient implements ClientModInitializer {
@@ -28,5 +30,7 @@ public class ArctechzClient implements ClientModInitializer {
     }
     private void initPayloads() {
         ClientPlayNetworking.registerGlobalReceiver(HandleDropSlotPayload.ID, new HandleDropSlotPayload.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(PatchNotePayload.ID, new PatchNotePayload.Receiver());
+        ClientPlayNetworking.registerGlobalReceiver(EnforceConfigMatchPayload.ID, new EnforceConfigMatchPayload.Receiver());
     }
 }

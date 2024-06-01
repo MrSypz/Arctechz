@@ -22,7 +22,7 @@ import sypztep.arctechz.ModConfig;
 public abstract class ItemEntityRendererMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void renderCustomName(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (!ModConfig.featuerMerge)
+        if (!ModConfig.featureMerge)
             return;
         MinecraftClient client = MinecraftClient.getInstance();
         PlayerEntity player = client.player;

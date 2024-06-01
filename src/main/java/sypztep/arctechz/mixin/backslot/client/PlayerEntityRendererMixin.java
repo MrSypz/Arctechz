@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import sypztep.arctechz.client.render.feature.AdditionItemFeatureRenderer;
 import sypztep.arctechz.client.render.feature.BackWeaponFeatureRenderer;
 
 @Environment(EnvType.CLIENT)
@@ -24,10 +25,8 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 
     @Inject(method = "<init>", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void initMixin(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo info) {
-//        this.addFeature(new BackToolFeatureRenderer(this, ctx.getHeldItemRenderer()));
-//        this.addFeature(new BeltSlotFeatureRenderer(this, ctx.getHeldItemRenderer()));
         this.addFeature(new BackWeaponFeatureRenderer(this,ctx.getHeldItemRenderer()));
-//        this.addFeature(new DeathScytheFeatureRenderer(this,ctx.getHeldItemRenderer()));
+        this.addFeature(new AdditionItemFeatureRenderer(this,ctx.getHeldItemRenderer()));
     }
 
 }

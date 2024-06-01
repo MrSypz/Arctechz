@@ -42,7 +42,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
-        if (!ModConfig.featuerMerge)
+        if (!ModConfig.featureMerge)
             return;
         if (!this.getWorld().isClient) {
             LivingEntity entity = (LivingEntity) (Object) this;
@@ -72,7 +72,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
     @Inject(method = "onDeath", at = @At("HEAD"))
     public void onDeath(DamageSource source, CallbackInfo ci) {
-        if (!ModConfig.featuerMerge)
+        if (!ModConfig.featureMerge)
             return;
         LivingEntity entity = (LivingEntity) (Object) this;
         int count = entity.getDataTracker().get(MERGE_COUNT);
