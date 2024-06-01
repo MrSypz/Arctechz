@@ -9,7 +9,9 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.feature.ArctechzFeature;
+import sypztep.arctechz.feature.data.PlayerCosmeticData;
 import sypztep.arctechz.feature.render.model.hat.OverheadModel;
 import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
 
@@ -27,11 +29,11 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-//		PlayerCosmeticData cosmeticData = ArctechzFeature.getCosmeticData(entity);
-		if (!entity.isInvisible()) {
-//			String playerOverhead = cosmeticData.getOverhead();
-//			if (playerOverhead != null) {
-				ResolvedOverheadData resolvedOverheadData = this.models.get("furina_hat");
+		PlayerCosmeticData cosmeticData = ArctechzFeature.getCosmeticData(entity);
+		if (ModConfig.shouldDisplayCosmetics() && cosmeticData != null && !entity.isInvisible()) {
+			String playerOverhead = cosmeticData.getOverhead();
+			if (playerOverhead != null) {
+				ResolvedOverheadData resolvedOverheadData = this.models.get(playerOverhead);
 				if (resolvedOverheadData != null) {
 					Identifier texture = resolvedOverheadData.texture();
 					OverheadModel model = resolvedOverheadData.model();
@@ -42,7 +44,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 					model.head.yaw = this.getContextModel().head.yaw;
 					model.render(matrices, vertexConsumers.getBuffer(GlowyRenderLayer.get(texture)), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
 				}
-//			}
+			}
 		}
 	}
 

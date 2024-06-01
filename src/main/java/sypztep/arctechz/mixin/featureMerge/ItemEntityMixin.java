@@ -30,6 +30,8 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
+        if (!ModConfig.featuerMerge)
+            return;
         if (!this.getWorld().isClient) {
             List<ItemEntity> nearbyItems = this.getWorld().getEntitiesByClass(
                     ItemEntity.class,
@@ -45,6 +47,12 @@ public abstract class ItemEntityMixin extends Entity {
             }
             updateCustomName((ItemEntity) (Object) this);
         }
+    }
+    @Inject(method = "tryMerge()V", at = @At("HEAD"), cancellable = true)
+    private void disableVanillaMerge(CallbackInfo ci) {
+        if (!ModConfig.featuerMerge)
+            return;
+        ci.cancel();
     }
 
     @Unique
@@ -87,10 +95,7 @@ public abstract class ItemEntityMixin extends Entity {
         updateCustomName(entity2);
     }
 
-    @Inject(method = "tryMerge()V", at = @At("HEAD"), cancellable = true)
-    private void disableVanillaMerge(CallbackInfo ci) {
-        ci.cancel();
-    }
+
 
     @Unique
     private void updateCustomName(ItemEntity entity) {

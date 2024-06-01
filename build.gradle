@@ -50,6 +50,8 @@ dependencies {
 
 
     modImplementation include ("org.ladysnake:satin:${satin_version}")
+
+    modImplementation "com.ptsmods:devlogin:3.4.1"
 }
 
 processResources {

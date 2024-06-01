@@ -23,6 +23,7 @@ public class BackWeaponFeatureRenderer extends HeldItemFeatureRenderer<AbstractC
 
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity livingEntity, float f, float g, float h, float j, float k, float l) {
+        //TODO: Customize able adust weapon style to other player can see 1#
         if (!BackWeaponComponent.isHoldingBackWeapon(livingEntity)) {
             ItemStack stack = BackWeaponComponent.getBackWeapon(livingEntity);
             if (!stack.isEmpty()) {

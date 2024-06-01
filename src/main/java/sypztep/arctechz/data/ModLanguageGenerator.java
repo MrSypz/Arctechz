@@ -16,17 +16,23 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
         addcallbackslot(translationBuilder,"Fail to drop backslot item switch to main hand first!");
+        addconfig(translationBuilder,"title","Arctechz Main");
+
+        addconfig(translationBuilder,"feature","Merge Feature");
+        addconfig(translationBuilder,"stackSize","Max Merge Size");
+        addconfig(translationBuilder,"mergeRange","Max Merge Range");
+        addconfig(translationBuilder,"cosmetics","Cosmetics");
+        addconfig(translationBuilder,"enum.CosmeticsOptions.ENABLE","Enable");
+        addconfig(translationBuilder,"enum.CosmeticsOptions.FIRST_PERSON","First Person");
+        addconfig(translationBuilder,"enum.CosmeticsOptions.DISABLE","Disable");
+
+        addconfig(translationBuilder,"category.client","Arctechz Client Side");
+        addconfig(translationBuilder,"viewItemDistance","viewItemDistance");
     }
     private static void addcallbackslot(TranslationBuilder translationBuilder,String message) {
         translationBuilder.add(Arctechz.id("backslot.feature.dropfail").toString(),message);
     }
-    private static void addEnchantment (TranslationBuilder translationBuilder, Enchantment enchantment, String name, String description) {
-        translationBuilder.add(enchantment, name);
-        translationBuilder.add(enchantment.getTranslationKey() + ".desc", description);
-    }
-
-    private static void addDeathMessage (TranslationBuilder translationBuilder, String base, String message) {
-        translationBuilder.add("death.attack." + base, "%1$s " + message + " %2$s");
-        translationBuilder.add("death.attack." + base + ".item", "%1$s " + message + " %2$s using %3$s");
+    private static void addconfig(TranslationBuilder translationBuilder,String configname,String message) {
+        translationBuilder.add(Arctechz.id("midnightconfig" + "." + configname).toString(),message);
     }
 }

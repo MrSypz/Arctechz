@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.common.init.ModTags;
 import sypztep.arctechz.common.util.ArctechzUtil;
 
@@ -41,6 +42,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
+        if (!ModConfig.featuerMerge)
+            return;
         if (!this.getWorld().isClient) {
             LivingEntity entity = (LivingEntity) (Object) this;
 
@@ -64,6 +67,34 @@ public abstract class LivingEntityMixin extends Entity {
             // Ensure the custom name is updated after potential merging
             if (!isBlacklisted(entity)) {
                 updateCustomName(entity);
+            }
+        }
+    }
+    @Inject(method = "onDeath", at = @At("HEAD"))
+    public void onDeath(DamageSource source, CallbackInfo ci) {
+        if (!ModConfig.featuerMerge)
+            return;
+        LivingEntity entity = (LivingEntity) (Object) this;
+        int count = entity.getDataTracker().get(MERGE_COUNT);
+
+        if (count > 1) {
+            int newCount = count - 1;
+            entity.getDataTracker().set(MERGE_COUNT, newCount);
+
+            if (!isBlacklisted(entity)) {
+                updateCustomName(entity);
+            }
+
+            LivingEntity newEntity = (LivingEntity) entity.getType().create(entity.getWorld());
+            if (newEntity != null) {
+                newEntity.refreshPositionAndAngles(entity.getX(), entity.getY(), entity.getZ(), entity.getYaw(), entity.getPitch());
+                newEntity.getDataTracker().set(MERGE_COUNT, newCount);
+
+                if (!isBlacklisted(newEntity)) {
+                    newEntity.setCustomName(ArctechzUtil.createCustomName(newCount, newEntity.getType().getName().getString()));
+                }
+
+                entity.getWorld().spawnEntity(newEntity);
             }
         }
     }
@@ -110,32 +141,5 @@ public abstract class LivingEntityMixin extends Entity {
     @Unique
     private PlayerEntity getNearestPlayer(LivingEntity entity, double maxDistance) {
         return this.getWorld().getClosestPlayer(entity.getX(), entity.getY(), entity.getZ(), maxDistance, false);
-    }
-
-    @Inject(method = "onDeath", at = @At("HEAD"))
-    public void onDeath(DamageSource source, CallbackInfo ci) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-        int count = entity.getDataTracker().get(MERGE_COUNT);
-
-        if (count > 1) {
-            int newCount = count - 1;
-            entity.getDataTracker().set(MERGE_COUNT, newCount);
-
-            if (!isBlacklisted(entity)) {
-                updateCustomName(entity);
-            }
-
-            LivingEntity newEntity = (LivingEntity) entity.getType().create(entity.getWorld());
-            if (newEntity != null) {
-                newEntity.refreshPositionAndAngles(entity.getX(), entity.getY(), entity.getZ(), entity.getYaw(), entity.getPitch());
-                newEntity.getDataTracker().set(MERGE_COUNT, newCount);
-
-                if (!isBlacklisted(newEntity)) {
-                    newEntity.setCustomName(ArctechzUtil.createCustomName(newCount, newEntity.getType().getName().getString()));
-                }
-
-                entity.getWorld().spawnEntity(newEntity);
-            }
-        }
     }
 }
