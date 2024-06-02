@@ -17,12 +17,6 @@ public class ModConfig extends MidnightConfig {
     public static boolean shouldDisplayCosmetics() {
         return cosmetics == CosmeticsOptions.ENABLE || cosmetics == CosmeticsOptions.FIRST_PERSON;
     }
-
-    public static int encode() {
-        String encoding = "" + featureMerge;
-        return encoding.hashCode();
-    }
-
     public enum CosmeticsOptions {
         ENABLE, FIRST_PERSON, DISABLE
     }

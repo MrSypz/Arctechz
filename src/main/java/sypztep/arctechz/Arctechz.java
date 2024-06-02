@@ -2,28 +2,42 @@ package sypztep.arctechz;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.Identifier;
+import software.bernie.geckolib.GeckoLib;
+import software.bernie.geckolib.GeckoLibClient;
 import sypztep.arctechz.client.event.SendPatchNoteEvent;
 import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
 import sypztep.arctechz.client.payload.PatchNotePayload;
+import sypztep.arctechz.common.init.ModEntityTypes;
+import sypztep.arctechz.common.init.ModMobSpawnEvent;
+import sypztep.arctechz.common.init.ModParticles;
 import sypztep.arctechz.common.payload.HoldWeaponPayload;
 import sypztep.arctechz.common.payload.SwapInvPayload;
 import sypztep.arctechz.common.payload.SwapWeaponPayload;
 
 public class Arctechz implements ModInitializer {
     public static final String MODID = "arctechz";
-    public static Identifier id (String id) {
-        return new Identifier(MODID,id);
+
+    public static Identifier id(String id) {
+        return new Identifier(MODID, id);
     }
+
     @Override
     public void onInitialize() {
         MidnightConfig.init(MODID, ModConfig.class);
         initPayloads();
+        ModEntityTypes.init();
+        ModMobSpawnEvent.init();
     }
+
     private void initPayloads() {
         ServerPlayConnectionEvents.JOIN.register(new SendPatchNoteEvent());
 

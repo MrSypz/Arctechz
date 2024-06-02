@@ -1,0 +1,10 @@
+{
+  "entity.raven.caw": {
+    "sounds": [
+      "arctechz:raven/raven_1",
+      "arctechz:raven/raven_2",
+      "arctechz:raven/raven_3"
+    ],
+    "subtitle": "arctechz.subtitles.entity.raven.caw"
+  }
+}

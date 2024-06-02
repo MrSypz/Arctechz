@@ -11,7 +11,7 @@ import sypztep.arctechz.client.payload.PatchNotePayload;
 public class SendPatchNoteEvent implements ServerPlayConnectionEvents.Join {
 	@Override
 	public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
-		EnforceConfigMatchPayload.send(handler.getPlayer(), ModConfig.encode());
+		EnforceConfigMatchPayload.send(handler.getPlayer(), ModConfig.featureMerge);
 		PatchNotePayload.send(handler.getPlayer());
 	}
 }

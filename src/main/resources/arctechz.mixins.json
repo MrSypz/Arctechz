@@ -7,6 +7,7 @@
     "backslot.PlayerInventoryMixin",
     "backslot.PlayerScreenHandlerMixin",
     "backslot.ServerPlayNetworkHandlerMixin",
+    "backslot.TridentItemMixin",
     "featureMerge.HopperBlockEntityMixin",
     "featureMerge.ItemEntityMixin",
     "featureMerge.LivingEntityMixin"

@@ -3,6 +3,7 @@ package sypztep.arctechz.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,9 @@ import sypztep.arctechz.client.event.ClientHandleTick;
 import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
 import sypztep.arctechz.client.payload.PatchNotePayload;
+import sypztep.arctechz.client.render.entity.RavenEntityRenderer;
+import sypztep.arctechz.common.init.ModEntityTypes;
+import sypztep.arctechz.common.init.ModParticles;
 import sypztep.arctechz.common.util.WeaponSlotCallback;
 
 public class ArctechzClient implements ClientModInitializer {
@@ -26,6 +30,10 @@ public class ArctechzClient implements ClientModInitializer {
     public void onInitializeClient() {
         initPayloads();
         ClientHandleTick.init();
+
+        EntityRendererRegistry.register(ModEntityTypes.RAVEN, RavenEntityRenderer::new);
+        ModParticles.initParticles();
+
         WeaponSlotCallback.EVENT.register(ArctechzClient::interact);
     }
     private void initPayloads() {
