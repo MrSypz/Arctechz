@@ -11,7 +11,7 @@ import net.minecraft.util.Util;
 
 @Environment(EnvType.CLIENT)
 public class PatchNoteScreen extends Screen {
-    public static final String LinkPatchNote = "http://mc-arctechz.trueddns.com:25711/";
+    public static final String LinkPatchNote = "http://mc-arctechz.trueddns.com:25711/index.html";
 
     public PatchNoteScreen() {
         super(Text.literal("Patch Notes"));
