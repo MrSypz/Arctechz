@@ -9,5 +9,8 @@
   "arctechz.midnightconfig.stackSize": "Max Merge Size",
   "arctechz.midnightconfig.title": "Arctechz Main",
   "arctechz.midnightconfig.viewItemDistance": "viewItemDistance",
-  "arctechz:backslot.feature.dropfail": "Fail to drop backslot item switch to main hand first!"
+  "arctechz:backslot.feature.dropfail": "Fail to drop backslot item switch to main hand first!",
+  "entity.arctechz.raven": "Raven",
+  "key.arctechz.select_weapon": "Select Weapon",
+  "key.arctechz.swap_weapon": "Swap Weapon"
 }
