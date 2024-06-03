@@ -9,7 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.TridentItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,10 +28,13 @@ public class TridentItemMixin {
     )
     private boolean tridentfixdupe(World world, Entity entity, Operation<Boolean> operation, @Local(ordinal = 0) ItemStack stack, @Local(ordinal = 0) LivingEntity user) {
         if (user instanceof PlayerEntity player) {
-            if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack) > 0) {
-                return operation.call(world, entity);
+            if (player.getActiveItem().isOf(Items.TRIDENT)) {
+                if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack) > 0) {
+                    return operation.call(world, entity);
+                }
+                player.getMainHandStack().decrementUnlessCreative(1,player);
             }
-            player.getActiveItem().decrementUnlessCreative(1,player);
+            else return operation.call(world, entity);
         }
         return operation.call(world, entity);
     }

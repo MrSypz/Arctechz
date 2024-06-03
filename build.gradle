@@ -58,7 +58,6 @@ dependencies {
     modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
 
 
-
     modImplementation include ("org.ladysnake:satin:${satin_version}")
 
     modImplementation "com.ptsmods:devlogin:3.4.1"
