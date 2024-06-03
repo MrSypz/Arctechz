@@ -21,6 +21,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider{
         getOrCreateTagBuilder(ModTags.Items.ALLOW_BACKSLOT_ITEM)
                 .addOptional(ItemTags.SWORDS.id())
                 .addOptional(ItemTags.AXES.id())
+                .addOptional(ItemTags.SHOVELS.id())
+                .addOptional(ItemTags.HOES.id())
+                .addOptional(ItemTags.PICKAXES.id())
                 .add(Items.TRIDENT)
                 .add(Items.SHULKER_BOX);
     }
