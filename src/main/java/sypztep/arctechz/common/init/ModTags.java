@@ -13,5 +13,6 @@ public class ModTags {
     }
     public static class Items {
         public static final TagKey<Item> BLACKLIST_MERGE_ITEM = TagKey.of(Registries.ITEM.getKey(), Arctechz.id("blacklist_merge_item"));
+        public static final TagKey<Item> ALLOW_BACKSLOT_ITEM = TagKey.of(Registries.ITEM.getKey(), Arctechz.id("allow_backslot_item"));
     }
 }

@@ -28,7 +28,7 @@ public class TridentItemMixin {
     )
     private boolean tridentfixdupe(World world, Entity entity, Operation<Boolean> operation, @Local(ordinal = 0) ItemStack stack, @Local(ordinal = 0) LivingEntity user) {
         if (user instanceof PlayerEntity player) {
-            if (player.getActiveItem().isOf(Items.TRIDENT)) {
+            if (player.getMainHandStack().isOf(Items.TRIDENT)) {
                 if (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, stack) > 0) {
                     return operation.call(world, entity);
                 }
