@@ -2,6 +2,7 @@ package sypztep.arctechz.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.RegistryWrapper;
 import sypztep.arctechz.Arctechz;
 
@@ -26,8 +27,7 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
         addconfig(translationBuilder,"enum.CosmeticsOptions.DISABLE","Disable");
         addconfig(translationBuilder,"category.client","Arctechz Client Side");
         addconfig(translationBuilder,"viewItemDistance","viewItemDistance");
-        addkeycategory(translationBuilder);
-        addkeybind(translationBuilder,"select_weapon","Select Weapon");
+        addkeycategory(translationBuilder, "Arctechz");
         addkeybind(translationBuilder,"select_weapon","Select Weapon");
         addkeybind(translationBuilder,"swap_weapon","Swap Weapon");
 
@@ -43,8 +43,8 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
     private static void addkeybind(TranslationBuilder translationBuilder,String configname,String message) {
         translationBuilder.add("key."+ Arctechz.MODID + "." + configname,message);
     }
-    private static void addkeycategory(TranslationBuilder translationBuilder) {
-        translationBuilder.add("key.categories" + Arctechz.MODID , "Arctechz");
+    private static void addkeycategory(TranslationBuilder translationBuilder,String message) {
+        translationBuilder.add("key.categories" + Arctechz.MODID ,message);
     }
     private static void addentity(TranslationBuilder translationBuilder,String configname,String message) {
         translationBuilder.add("entity."+ Arctechz.MODID + "." + configname,message);
