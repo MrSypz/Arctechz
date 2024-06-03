@@ -1,23 +1,23 @@
 {
   "values": [
     {
-      "id": "minecraft:swords",
+      "id": "#minecraft:axes",
       "required": false
     },
     {
-      "id": "minecraft:axes",
+      "id": "#minecraft:shovels",
       "required": false
     },
     {
-      "id": "minecraft:shovels",
+      "id": "#minecraft:hoes",
       "required": false
     },
     {
-      "id": "minecraft:hoes",
+      "id": "#minecraft:pickaxes",
       "required": false
     },
     {
-      "id": "minecraft:pickaxes",
+      "id": "#minecraft:swords",
       "required": false
     },
     "minecraft:trident",

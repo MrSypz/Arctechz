@@ -14,7 +14,7 @@ public class ClientHandleTick {
                     BackWeaponComponent.setHoldingBackWeapon(client.player, !BackWeaponComponent.isHoldingBackWeapon(client.player));
                 }
 
-                if (ArctechzClient.SWAP_KEYBINDING.wasPressed()) {
+                if (ArctechzClient.SWAP_KEYBINDING.wasPressed() && client.player.getMainHandStack().isIn(ModTags.Items.ALLOW_BACKSLOT_ITEM)) {
                     SwapWeaponPayload.send();
                 }
             }
