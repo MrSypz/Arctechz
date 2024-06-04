@@ -1,9 +1,8 @@
-package sypztep.arctechz.feature.initloadFeature;
+package sypztep.arctechz.feature.init;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import net.minecraft.client.MinecraftClient;
-import sypztep.arctechz.feature.ArctechzFeature;
 import sypztep.arctechz.feature.data.PlayerCosmeticData;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 
-public class featureinit {
+public class LoadData {
     private static final String COSMETICS_URL = "https://mrsypz.github.io/sypztep.github.io/uuidfeature.json";
     private static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
@@ -48,7 +47,8 @@ public class featureinit {
         @Override
         public PlayerCosmeticData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
-            return new PlayerCosmeticData (jsonObject.get("overhead"));
+            return new PlayerCosmeticData (jsonObject.get("overhead")
+                    ,jsonObject.get("back"));
         }
     }
 }

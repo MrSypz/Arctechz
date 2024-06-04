@@ -4,18 +4,30 @@ import com.google.gson.JsonElement;
 
 public class PlayerCosmeticData {
     private final String overhead;
+    private final String back;
 
-    public PlayerCosmeticData(JsonElement overhead) {
+    public PlayerCosmeticData(JsonElement overhead, JsonElement back) {
             /*
                 Overhead Feature part
              */
         if (overhead.isJsonNull())
             this.overhead = null;
-         else
-             this.overhead = overhead.getAsString();
+        else
+            this.overhead = overhead.getAsString();
+        /*
+            Back Feature part
+         */
+        if (back.isJsonNull())
+            this.back = null;
+        else
+            this.back = back.getAsString();
     }
 
     public String getOverhead() {
         return overhead;
+    }
+
+    public String getBack() {
+        return back;
     }
 }
