@@ -16,7 +16,7 @@ import static net.minecraft.block.entity.HopperBlockEntity.transfer;
 public abstract class HopperBlockEntityMixin {
     @Inject(method = "extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z", at = @At("HEAD"), cancellable = true)
     private static void extract(Inventory inventory, ItemEntity itemEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (!ModConfig.featureMerge)
+        if (!ModConfig.featureItemMerge)
             return;
         ItemStack itemStack = itemEntity.getStack();
         boolean inserted = false;

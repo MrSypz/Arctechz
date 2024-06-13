@@ -6,6 +6,10 @@ public class ModConfig extends MidnightConfig {
     @Entry
     public static boolean featureMerge = false;
     @Entry
+    public static boolean featureItemMerge = true;
+    @Entry
+    public static boolean clientItemRender = true;
+    @Entry
     public static int stackSize = 2048;
     @Entry(category = "client", min = 1)
     public static int viewItemDistance = 512;

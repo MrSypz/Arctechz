@@ -29,7 +29,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
-        if (!ModConfig.featureMerge)
+        if (!ModConfig.featureItemMerge)
             return;
         if (!this.getWorld().isClient) {
             List<ItemEntity> nearbyItems = this.getWorld().getEntitiesByClass(
@@ -49,7 +49,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
     @Inject(method = "tryMerge()V", at = @At("HEAD"), cancellable = true)
     private void disableVanillaMerge(CallbackInfo ci) {
-        if (!ModConfig.featureMerge)
+        if (!ModConfig.featureItemMerge)
             return;
         ci.cancel();
     }
