@@ -8,5 +8,6 @@
   "entity.arctechz.raven": "Raven",
   "key.arctechz.select_weapon": "Select Weapon",
   "key.arctechz.swap_weapon": "Swap Weapon",
-  "key.categories.arctechz": "Arctechz"
+  "key.categories.arctechz": "Arctechz",
+  "tag.item.arctechz.allow_backslot_item": "Backlist item swap to main hand"
 }
