@@ -1,10 +1,12 @@
 {
   "arctechz.midnightconfig.category.client": "Arctechz Client Side",
+  "arctechz.midnightconfig.clientItemRender": "Render Item Name",
   "arctechz.midnightconfig.cosmetics": "Cosmetics",
   "arctechz.midnightconfig.enum.CosmeticsOptions.DISABLE": "Disable",
   "arctechz.midnightconfig.enum.CosmeticsOptions.ENABLE": "Enable",
   "arctechz.midnightconfig.enum.CosmeticsOptions.FIRST_PERSON": "First Person",
-  "arctechz.midnightconfig.featureMerge": "Merge Feature",
+  "arctechz.midnightconfig.featureItemMerge": "Item Merge Feature",
+  "arctechz.midnightconfig.featureMerge": "Entity Merge Feature",
   "arctechz.midnightconfig.mergeRange": "Max Merge Range",
   "arctechz.midnightconfig.stackSize": "Max Merge Size",
   "arctechz.midnightconfig.title": "Arctechz Main",
