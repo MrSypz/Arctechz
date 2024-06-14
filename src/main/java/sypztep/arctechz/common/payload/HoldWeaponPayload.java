@@ -10,7 +10,7 @@ import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
 
 public record HoldWeaponPayload(boolean holdweapon) implements CustomPayload {
-    public static final CustomPayload.Id<HoldWeaponPayload> ID = CustomPayload.id(Arctechz.id("hold").toString());
+    public static final CustomPayload.Id<HoldWeaponPayload> ID = CustomPayload.id("hold");
     public static final PacketCodec<PacketByteBuf, HoldWeaponPayload> CODEC = PacketCodec.tuple(PacketCodecs.BOOL, HoldWeaponPayload::holdweapon, HoldWeaponPayload::new);
     @Override
     public Id<? extends CustomPayload> getId() {

@@ -1,10 +1,10 @@
 package sypztep.arctechz.feature.render.renderer;
 
-import ladysnake.satin.mixin.client.render.RenderLayerAccessor;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.util.Identifier;
+import org.ladysnake.satin.mixin.client.render.RenderLayerAccessor;
 
 public class GlowyRenderLayer extends RenderLayer {
 	public GlowyRenderLayer(String name, VertexFormat vertexFormat, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean hasCrumbling, boolean translucent, Runnable startAction, Runnable endAction) {

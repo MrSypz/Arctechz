@@ -19,7 +19,7 @@ public class Arctechz implements ModInitializer {
     public static final String MODID = "arctechz";
 
     public static Identifier id(String id) {
-        return new Identifier(MODID, id);
+        return Identifier.of(MODID, id);
     }
 
     @Override

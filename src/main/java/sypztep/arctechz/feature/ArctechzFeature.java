@@ -25,7 +25,7 @@ import sypztep.arctechz.feature.render.model.hat.HutaoHat;
 public class ArctechzFeature implements ClientModInitializer {
     public static final String MODID = "arctechz_feature";
     public static Identifier id (String path) {
-        return new Identifier(MODID,path);
+        return Identifier.of(MODID,path);
     }
     public static ImmutableMap<String, OverheadData> OVERHEADS_DATA;
     public static ImmutableMap<String, BackData> BACKCOSMETIC_DATA;

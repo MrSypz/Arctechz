@@ -42,11 +42,12 @@ public class BackFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 					model.back.pivotY = this.getContextModel().body.pivotY;
 					model.back.pitch = this.getContextModel().body.pitch;
 					model.back.yaw = this.getContextModel().body.yaw;
-					model.render(matrices, vertexConsumers.getBuffer(GlowyRenderLayer.get(texture)), 15728880, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+					model.render(matrices, vertexConsumers.getBuffer(GlowyRenderLayer.get(texture)), 15728880, OverlayTexture.DEFAULT_UV);
 				}
 			}
 		}
 	}
+
 
 	private record ResolveBackData(Identifier texture, BackCosmeticModel model) {
 	}

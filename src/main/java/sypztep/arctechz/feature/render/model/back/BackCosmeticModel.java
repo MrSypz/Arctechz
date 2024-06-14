@@ -14,9 +14,8 @@ public abstract class BackCosmeticModel extends Model {
 		super(GlowyRenderLayer::get);
 		this.back = ctx.getPart(entityModelLayer).getChild("body");
 	}
-
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		this.back.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		this.back.render(matrices, vertices, light, overlay);
 	}
 }

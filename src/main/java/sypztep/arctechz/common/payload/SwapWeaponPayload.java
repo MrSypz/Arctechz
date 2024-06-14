@@ -11,7 +11,7 @@ import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
 
 public record SwapWeaponPayload() implements CustomPayload {
-    public static final CustomPayload.Id<SwapWeaponPayload> ID = CustomPayload.id(Arctechz.id("swap").toString());
+    public static final CustomPayload.Id<SwapWeaponPayload> ID = CustomPayload.id("swap");
     public static final PacketCodec<PacketByteBuf, SwapWeaponPayload> CODEC = PacketCodec.unit(new SwapWeaponPayload());
     @Override
     public Id<? extends CustomPayload> getId() {

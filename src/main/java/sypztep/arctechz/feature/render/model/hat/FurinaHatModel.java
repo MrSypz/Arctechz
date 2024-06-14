@@ -58,9 +58,8 @@ public class FurinaHatModel extends OverheadModel {
         furina_hat_model.addChild("ahoge_model_r1", ModelPartBuilder.create().uv(2, 45).cuboid(-4.5F, -3.5F, -7.0F, 9.0F, 9.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(12.0F, -7.0F, -5.5F, 0.0F, 0.7854F, 0.0F));
         return TexturedModelData.of(modelData, 75, 75);
 	}
-
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		head.render(matrices, vertices, light, overlay, color);
 	}
 }

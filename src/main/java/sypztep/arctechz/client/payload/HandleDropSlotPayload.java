@@ -13,7 +13,7 @@ import net.minecraft.util.Formatting;
 import sypztep.arctechz.Arctechz;
 
 public record HandleDropSlotPayload() implements CustomPayload {
-    public static final CustomPayload.Id<HandleDropSlotPayload> ID = CustomPayload.id(Arctechz.id("handle_drop_backslot").toString());
+    public static final CustomPayload.Id<HandleDropSlotPayload> ID = CustomPayload.id("handle_drop_backslot");
     public static final PacketCodec<PacketByteBuf, HandleDropSlotPayload> CODEC = PacketCodec.unit(new HandleDropSlotPayload());
 
     @Override

@@ -8,19 +8,21 @@ import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.common.entity.mob.RavenEntity;
 
 public class RavenEntityModel extends GeoModel<RavenEntity> {
+    public RavenEntityModel() {
+    }
     @Override
     public Identifier getModelResource(RavenEntity object) {
-        return new Identifier(Arctechz.MODID, "geo/entity/raven.geo.json");
+        return Arctechz.id("geo/entity/raven.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(RavenEntity object) {
-        return new Identifier(Arctechz.MODID, "textures/entity/raven/raven_"+ object.getRavenType().toString().toLowerCase() + ".png");
+        return Arctechz.id("textures/entity/raven/raven_"+ object.getRavenType().toString().toLowerCase() + ".png");
     }
 
     @Override
     public Identifier getAnimationResource(RavenEntity animatable) {
-        return new Identifier(Arctechz.MODID, "animations/entity/raven.animation.json");
+        return Arctechz.id("animations/entity/raven.animation.json");
     }
     @Override
     public void setCustomAnimations(RavenEntity entity, long instanceId, AnimationState<RavenEntity> animationState) {

@@ -13,7 +13,7 @@ import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.ModConfig;
 
 public record EnforceConfigMatchPayload(boolean flag) implements CustomPayload {
-    public static final Id<EnforceConfigMatchPayload> ID = CustomPayload.id(Arctechz.id("enforce_config_match").toString());
+    public static final Id<EnforceConfigMatchPayload> ID = CustomPayload.id("enforce_config_match");
     public static final PacketCodec<PacketByteBuf, EnforceConfigMatchPayload> CODEC = PacketCodec.tuple(PacketCodecs.BOOL, EnforceConfigMatchPayload::flag, EnforceConfigMatchPayload::new);
 
     private static final Text DISCONNECT_TEXT = Text.literal("The server you are attempting to connect to has ")

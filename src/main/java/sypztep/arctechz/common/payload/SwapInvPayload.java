@@ -12,7 +12,7 @@ import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.common.component.entity.BackWeaponComponent;
 
 public record SwapInvPayload(int slotId) implements CustomPayload {
-    public static final CustomPayload.Id<SwapInvPayload> ID = CustomPayload.id(Arctechz.id("swap_inv").toString());
+    public static final CustomPayload.Id<SwapInvPayload> ID = CustomPayload.id("swap_inv");
     public static final PacketCodec<PacketByteBuf, SwapInvPayload> CODEC = PacketCodec.tuple(PacketCodecs.INTEGER, SwapInvPayload::slotId, SwapInvPayload::new);
     @Override
     public Id<? extends CustomPayload> getId() {

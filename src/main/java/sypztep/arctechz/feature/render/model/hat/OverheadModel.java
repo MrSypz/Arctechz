@@ -14,9 +14,8 @@ public abstract class OverheadModel extends Model {
 		super(GlowyRenderLayer::get);
 		this.head = ctx.getPart(entityModelLayer).getChild("head");
 	}
-
 	@Override
-	public void render(MatrixStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		this.head.render(matrixStack, buffer, packedLight, packedOverlay);
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		this.head.render(matrices, vertices, light, overlay);
 	}
 }
