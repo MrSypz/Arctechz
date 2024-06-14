@@ -21,6 +21,7 @@
       "required": false
     },
     "minecraft:trident",
-    "minecraft:shulker_box"
+    "minecraft:shulker_box",
+    "minecraft:totem_of_undying"
   ]
 }
