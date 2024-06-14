@@ -6,21 +6,17 @@ import sypztep.arctechz.common.entity.mob.RavenEntity;
 
 public class RavenFollowOwnerGoal extends FollowOwnerGoal {
     private final TameableEntity tameable;
-    public RavenFollowOwnerGoal(TameableEntity tameable, double speed, float minDistance, float maxDistance, boolean leavesAllowed) {
-        super(tameable, speed, minDistance, maxDistance, leavesAllowed);
+    public RavenFollowOwnerGoal(TameableEntity tameable, double speed, float minDistance, float maxDistance) {
+        super(tameable, speed, minDistance, maxDistance);
         this.tameable = tameable;
     }
 
     @Override
     public boolean canStart() {
-        return !tameable.getDataTracker().get(RavenEntity.GOING_TO_RECEIVER) && super.canStart();
+        return !(Boolean)this.tameable.getDataTracker().get(RavenEntity.GOING_TO_RECEIVER) && super.canStart();
     }
-
     @Override
     public boolean shouldContinue() {
-        if(tameable.getDataTracker().get(RavenEntity.GOING_TO_RECEIVER)) {
-            return false;
-        }
-        return super.shouldContinue();
+        return !((Boolean) this.tameable.getDataTracker().get(RavenEntity.GOING_TO_RECEIVER)) && super.shouldContinue();
     }
 }

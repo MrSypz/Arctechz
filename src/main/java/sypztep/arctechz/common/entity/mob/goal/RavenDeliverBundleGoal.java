@@ -39,17 +39,18 @@ public class RavenDeliverBundleGoal<T extends TameableEntity> extends Goal {
             throw new IllegalArgumentException("Unsupported mob type for DeliverBundleGoal");
         }
     }
+
     public boolean canStart() {
         LivingEntity livingEntity = this.tameable.getOwner();
-        if(((RavenEntity) this.tameable).getReceiverUuid() != null) {
-            this.receiver = this.tameable.getWorld().getPlayerByUuid(((RavenEntity) this.tameable).getReceiverUuid());
+        if (((RavenEntity)this.tameable).getReceiverUuid() != null) {
+            this.receiver = this.tameable.getWorld().getPlayerByUuid(((RavenEntity)this.tameable).getReceiverUuid());
             LivingEntity receiver = this.receiver;
             if (this.receiver != null) {
                 if (livingEntity == null) {
                     return false;
                 } else if (livingEntity.isSpectator()) {
                     return false;
-                } else if (this.tameable.squaredDistanceTo(receiver) < (double) (this.minDistance * this.minDistance)) {
+                } else if (this.tameable.squaredDistanceTo(receiver) < (double)(this.minDistance * this.minDistance)) {
                     return false;
                 } else {
                     this.owner = livingEntity;
@@ -62,9 +63,8 @@ public class RavenDeliverBundleGoal<T extends TameableEntity> extends Goal {
     public boolean shouldContinue() {
         if (this.navigation.isIdle()) {
             return false;
-        }
-        else {
-            return this.tameable.squaredDistanceTo(this.receiver) > (double) (this.maxDistance * this.maxDistance);
+        } else {
+            return this.tameable.squaredDistanceTo(this.receiver) > (double)(this.maxDistance * this.maxDistance);
         }
     }
 
@@ -82,25 +82,22 @@ public class RavenDeliverBundleGoal<T extends TameableEntity> extends Goal {
     }
 
     public void tick() {
-        this.tameable.getLookControl().lookAt(this.receiver, 10.0F, this.tameable.getPitch());
+        this.tameable.getLookControl().lookAt(this.receiver, 10.0F, (float)this.tameable.getMaxLookPitchChange());
         if (--this.updateCountdownTicks <= 0) {
             this.updateCountdownTicks = 10;
-
-            if (this.tameable.squaredDistanceTo(this.receiver) >= 10000D) {
+            if (this.tameable.squaredDistanceTo(this.receiver) >= 10000.0) {
                 this.tryTeleport();
             } else {
                 this.navigation.startMovingTo(this.receiver, this.speed);
             }
-
-
         }
     }
 
     private void tryTeleport() {
         BlockPos blockPos = this.receiver.getBlockPos();
-        ((RavenEntity) this.tameable).spawnFeatherParticles(10);
+        ((RavenEntity)this.tameable).spawnFeatherParticles(10);
 
-        for (int i = 0; i < 10; ++i) {
+        for(int i = 0; i < 10; ++i) {
             int j = this.getRandomInt(-3, 3);
             int k = this.getRandomInt(-1, 1);
             int l = this.getRandomInt(-3, 3);
