@@ -6,9 +6,9 @@ public class ModConfig extends MidnightConfig {
     @Entry
     public static boolean featureMerge = false;
     @Entry
-    public static boolean featureItemMerge = true;
-    @Entry
-    public static boolean clientItemRender = true;
+    public static boolean featureItemMerge = false;
+    @Entry(category = "client")
+    public static boolean clientItemRender = false;
     @Entry
     public static int stackSize = 2048;
     @Entry(category = "client", min = 1)
