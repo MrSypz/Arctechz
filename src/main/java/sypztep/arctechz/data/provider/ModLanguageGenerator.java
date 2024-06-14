@@ -26,6 +26,8 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
         addkeybind(translationBuilder,"select_weapon","Select Weapon");
         addkeybind(translationBuilder,"swap_weapon","Swap Weapon");
 
+        tagtranslate(translationBuilder,"item","allow_backslot_item");
+
         addentity(translationBuilder,"raven","Raven");
     }
     private static void addcallbackslot(TranslationBuilder translationBuilder,String message) {
@@ -43,5 +45,8 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
     }
     private static void addentity(TranslationBuilder translationBuilder,String configname,String message) {
         translationBuilder.add("entity."+ Arctechz.MODID + "." + configname,message);
+    }
+    private static void tagtranslate(TranslationBuilder translationBuilder,String type,String message) {
+        translationBuilder.add("tag."+ type+ "."+ Arctechz.MODID + ".",message);
     }
 }
