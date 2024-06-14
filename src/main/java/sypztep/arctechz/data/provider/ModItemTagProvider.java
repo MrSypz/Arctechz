@@ -24,6 +24,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider{
                 .addOptionalTag(ItemTags.PICKAXES)
                 .addOptionalTag(ItemTags.SWORDS)
                 .add(Items.TRIDENT)
-                .add(Items.SHULKER_BOX);
+                .add(Items.SHULKER_BOX)
+                .add(Items.TOTEM_OF_UNDYING);
     }
 }
