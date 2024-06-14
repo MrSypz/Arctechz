@@ -1,6 +1,7 @@
 package sypztep.arctechz.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -11,7 +12,7 @@ import net.minecraft.item.TridentItem;
 import net.minecraft.util.ActionResult;
 import org.lwjgl.glfw.GLFW;
 import sypztep.arctechz.Arctechz;
-import sypztep.arctechz.client.event.ClientHandleTick;
+import sypztep.arctechz.client.event.BackSlotEvent;
 import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
 import sypztep.arctechz.client.render.entity.RavenEntityRenderer;
@@ -28,12 +29,11 @@ public class ArctechzClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         initPayloads();
-        ClientHandleTick.init();
+        ClientTickEvents.END_CLIENT_TICK.register(new BackSlotEvent());
 
         EntityRendererRegistry.register(ModEntityTypes.RAVEN, RavenEntityRenderer::new);
-        ModParticles.initParticles();
-
         WeaponSlotCallback.EVENT.register(ArctechzClient::interact);
+        ModParticles.initParticles();
     }
     private void initPayloads() {
         ClientPlayNetworking.registerGlobalReceiver(HandleDropSlotPayload.ID, new HandleDropSlotPayload.Receiver());
