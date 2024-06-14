@@ -53,22 +53,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class RavenEntity extends TameableEntity implements GeoAnimatable {
-    private final RawAnimation FLY = RawAnimation.begin().thenPlay(Math.abs(getVelocity().y) > 0.1f ? "fastFly" : "fly");
-    private final RawAnimation IDLE = RawAnimation.begin().thenPlay("idle");
-    private final RawAnimation SIT_IDLE = RawAnimation.begin().thenPlay("sitIdle");
     private static final TrackedData<Optional<UUID>> RECEIVER_UUID = DataTracker.registerData(RavenEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     public static final TrackedData<String> TYPE = DataTracker.registerData(RavenEntity.class, TrackedDataHandlerRegistry.STRING);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<Boolean> SITTING = DataTracker.registerData(RavenEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> GOING_TO_RECEIVER = DataTracker.registerData(RavenEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    public float maxWingDeviation;
-    public float prevMaxWingDeviation;
-
-    public RavenEntity(EntityType<? extends TameableEntity> entityType, World world) {
-        super(entityType, world);
+    public RavenEntity(EntityType<? extends TameableEntity> type, World world) {
+        super(type, world);
         moveControl = new FlightMoveControl(this, 90, false);
     }
+
+    public float maxWingDeviation;
+    public float prevMaxWingDeviation;
+    private float whuhhuh = 1.0f;
 
     @Override
     protected void initGoals() {
@@ -76,7 +74,7 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
         goalSelector.add(3, new RavenDeliverBundleGoal<>(this, 1, 6, 128, false));
         goalSelector.add(2, new SitGoal(this));
         goalSelector.add(3, new MeleeAttackGoal(this, 1, true));
-        goalSelector.add(4, new RavenFollowOwnerGoal(this, 1, 10, 2, false));
+        goalSelector.add(4, new RavenFollowOwnerGoal(this, 1, 10, 2));
         goalSelector.add(5, new AnimalMateGoal(this, 1));
         goalSelector.add(6, new WanderAroundFarGoal(this, 1));
         goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8));
@@ -87,7 +85,7 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
     }
 
     public static DefaultAttributeContainer.Builder createRavenAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 10).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_FLYING_SPEED, 0.7);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 14).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_FLYING_SPEED, 0.7);
     }
 
     @Override
@@ -138,6 +136,7 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
         birdNavigation.setCanEnterOpenDoors(true);
         return birdNavigation;
     }
+
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
@@ -151,10 +150,12 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
             builder.add(TYPE, random.nextBoolean() ? Type.DARK.toString() : Type.SEA_GREEN.toString());
         }
     }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isIn(ItemTags.MEAT);
     }
+
     @Override
     protected void mobTick() {
         super.mobTick();
@@ -178,6 +179,7 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
             }
         }
     }
+
     public void spawnFeatherParticles(int count) {
         if (getWorld().isClient) {
             float height = this.getHeight();
@@ -283,7 +285,7 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
     protected void addFlapEffects() {
         if (!isSitting())
             playSound(SoundEvents.ENTITY_PARROT_FLY, 0.15f, 1);
-        float whuhhuh = this.fallFlyingTicks + this.maxWingDeviation / 2.0f;
+        this.whuhhuh = this.getFallFlyingTicks() + this.maxWingDeviation / 2.0f;
     }
 
     @Override
@@ -306,6 +308,12 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
     @Override
     protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {
     }
+
+    @Override
+    protected boolean isFlappingWings() {
+        return this.getFallFlyingTicks() > this.whuhhuh;
+    }
+
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
@@ -323,26 +331,23 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
         }
         return child;
     }
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 3, this::predicate));
-    }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> ravenEntityAnimationState) {
-        if(!this.isOnGround()) {
-            ravenEntityAnimationState.getController().setAnimation(FLY);
-        } else if(!dataTracker.get(SITTING) && !this.hasVehicle()) {
-            ravenEntityAnimationState.getController().setAnimation(IDLE);
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
+        RawAnimation animationBuilder = RawAnimation.begin();
+        if (!this.isOnGround()) {
+            animationBuilder.thenLoop(Math.abs(this.getVelocity().y) > 0.1f ? "fastFly" : "fly");
+            event.getController().setAnimation(animationBuilder);
+        } else if (!(Boolean) this.dataTracker.get(SITTING) && !this.hasVehicle()) {
+            animationBuilder.thenLoop("idle");
+            event.getController().setAnimation(animationBuilder);
         } else {
-            ravenEntityAnimationState.getController().setAnimation(SIT_IDLE);
+            animationBuilder.thenLoop("sitIdle");
+            event.getController().setAnimation(animationBuilder);
         }
+
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
 
     @Override
     public boolean canAttackWithOwner(LivingEntity target, LivingEntity owner) {
@@ -395,16 +400,26 @@ public class RavenEntity extends TameableEntity implements GeoAnimatable {
         return ModSoundEvents.ENTITY_RAVEN_CAW;
     }
 
+    @Override
+    public EntityView method_48926() {
+        return this.getWorld();
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 3, this::predicate));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.factory;
+    }
 
     @Override
     public double getTick(Object object) {
-        return age;
+        return this.age;
     }
 
-    @Override
-    public EntityView method_48926() {
-        return super.getWorld();
-    }
     public enum Type {
         DARK,
         ALBINO,
