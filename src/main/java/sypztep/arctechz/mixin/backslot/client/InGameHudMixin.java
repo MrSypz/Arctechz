@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
@@ -25,8 +26,6 @@ public abstract class InGameHudMixin {
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
     @Shadow
-    protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
-    @Shadow
     @Final
     private static Identifier HOTBAR_SELECTION_TEXTURE;
     @Shadow
@@ -36,8 +35,10 @@ public abstract class InGameHudMixin {
     @Final
     private static Identifier HOTBAR_OFFHAND_LEFT_TEXTURE;
 
+    @Shadow protected abstract void renderHotbarItem(DrawContext context, int x, int y, RenderTickCounter tickCounter, PlayerEntity player, ItemStack stack, int seed);
+
     @Inject(method = {"renderHotbar"}, at = {@At("TAIL")})
-    private void renderWeaponSlot(DrawContext context, float tickDelta, CallbackInfo ci) {
+    private void renderWeaponSlot(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         PlayerEntity player = this.getCameraPlayer();
         if (player != null) {
             ItemStack stack = BackWeaponComponent.getBackWeapon(player);
@@ -51,7 +52,7 @@ public abstract class InGameHudMixin {
                     RenderSystem.defaultBlendFunc();
                     n = i - 90 + 80 + 2;
                     int p = context.getScaledWindowHeight() - 19 - 70;
-                    this.renderHotbarItem(context, n, p, tickDelta, player, stack, 1);
+                    this.renderHotbarItem(context, n, p, tickCounter, player, stack, 1);
                     RenderSystem.disableBlend();
                 } else {
                     Arm arm = player.getMainArm().getOpposite();
@@ -65,9 +66,9 @@ public abstract class InGameHudMixin {
 
                     n = context.getScaledWindowHeight() - 16 - 3;
                     if (arm == Arm.RIGHT) {
-                        this.renderHotbarItem(context, i - 91 - 26, n, tickDelta, player, stack, 0);
+                        this.renderHotbarItem(context, i - 91 - 26, n, tickCounter, player, stack, 0);
                     } else {
-                        this.renderHotbarItem(context, i + 91 + 10, n, tickDelta, player, stack, 0);
+                        this.renderHotbarItem(context, i + 91 + 10, n, tickCounter, player, stack, 0);
                     }
 
                     RenderSystem.disableBlend();

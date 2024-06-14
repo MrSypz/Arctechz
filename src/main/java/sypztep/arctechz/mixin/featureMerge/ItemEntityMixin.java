@@ -20,9 +20,6 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Shadow
     private int pickupDelay;
-    @Unique
-    private static final float RANGE = ModConfig.mergeRange;
-
     public ItemEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -34,7 +31,7 @@ public abstract class ItemEntityMixin extends Entity {
         if (!this.getWorld().isClient) {
             List<ItemEntity> nearbyItems = this.getWorld().getEntitiesByClass(
                     ItemEntity.class,
-                    this.getBoundingBox().expand(RANGE),
+                    this.getBoundingBox().expand(ModConfig.mergeRange),
                     item -> item != (Object) this && canMerge((ItemEntity) (Object) this, item)
             );
 

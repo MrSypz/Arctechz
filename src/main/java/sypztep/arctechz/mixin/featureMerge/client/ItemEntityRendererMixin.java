@@ -2,9 +2,11 @@ package sypztep.arctechz.mixin.featureMerge.client;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,40 +19,33 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sypztep.arctechz.ModConfig;
-
+//After upgrade to 1.21 it no longer work
 @Mixin(ItemEntityRenderer.class)
 public abstract class ItemEntityRendererMixin {
     @Inject(method = "render*", at = @At("TAIL"))
     private void renderCustomName(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (!ModConfig.featureItemMerge)
-            return;
-        if (!ModConfig.clientItemRender)
+        if (!ModConfig.featureItemMerge || !ModConfig.clientItemRender)
             return;
         MinecraftClient client = MinecraftClient.getInstance();
         PlayerEntity player = client.player;
         double d = client.getEntityRenderDispatcher().getSquaredDistanceToCamera(itemEntity);
+        Vec3d vec3d = itemEntity.getAttachments().getPointNullable(EntityAttachmentType.NAME_TAG, 0, itemEntity.getYaw(g));
         if (itemEntity.hasCustomName()) {
-            if (player == null) {
-                return; // If there's no player, we can't render the name following the player.
+            if (player == null || d > ModConfig.viewItemDistance || vec3d == null) {
+                return; // If there's no player, we can't render the name following the player or distance is too far.
             }
-            if (d > ModConfig.viewItemDistance)
-                return;
-            Vec3d vec3d = itemEntity.getAttachments().getPointNullable(EntityAttachmentType.NAME_TAG, 0, itemEntity.getYaw(g));
-            if (vec3d != null) {
-                Text name = itemEntity.getCustomName();
-                TextRenderer textRenderer = ((ItemEntityRenderer) (Object) this).getTextRenderer();
-                matrixStack.push();
-                matrixStack.translate(vec3d.x, vec3d.y + 0.5, vec3d.z);
-                matrixStack.multiply(client.getEntityRenderDispatcher().getRotation());
-                matrixStack.scale(-0.025F, -0.025F, 0.025F);
-                Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-                float backgroundOpacity = client.options.getTextBackgroundOpacity(0.25F);
-                int backgroundColor = (int) (backgroundOpacity * 255.0F) << 24;
-                float j = (float) (-textRenderer.getWidth(name) / 2);
-                textRenderer.draw(name, j, 0, Colors.WHITE, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, backgroundColor, i);
-
-                matrixStack.pop();
-            }
+            Text name = itemEntity.getCustomName();
+            TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+            matrixStack.push();
+            matrixStack.translate(itemEntity.getX(), itemEntity.getY() + 0.5, itemEntity.getZ());
+            matrixStack.multiply(client.getEntityRenderDispatcher().getRotation());
+            matrixStack.scale(-0.025F, -0.025F, 0.025F);
+            Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+            float backgroundOpacity = client.options.getTextBackgroundOpacity(0.25F);
+            int backgroundColor = (int) (backgroundOpacity * 255.0F) << 24;
+            float j = (float) (-textRenderer.getWidth(name) / 2);
+            textRenderer.draw(name, j, 0, 0xFFFFFF,false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, backgroundColor,i);
+            matrixStack.pop();
         }
     }
 }
