@@ -37,14 +37,12 @@ public abstract class TridentItemMixin {
 
     private boolean tridentfixdupe(World world, Entity entity, Operation<Boolean> operation, @Local(ordinal = 0) ItemStack stack, @Local(ordinal = 0) LivingEntity user) {
         if (user instanceof PlayerEntity player) {
-            RegistryEntry<Enchantment> entry = (RegistryEntry<Enchantment>) Enchantments.RIPTIDE;
             if (player.getMainHandStack().isOf(Items.TRIDENT)) {
-                if (EnchantmentHelper.getLevel(entry,stack) > 0) {
+                if (EnchantmentHelper.hasAnyEnchantmentsIn(stack, EnchantmentTags.RIPTIDE_EXCLUSIVE_SET)) {
                     return operation.call(world, entity);
                 }
-                player.getMainHandStack().decrementUnlessCreative(1,player);
-            }
-            else return operation.call(world, entity);
+                player.getMainHandStack().decrementUnlessCreative(1, player);
+            } else return operation.call(world, entity);
         }
         return operation.call(world, entity);
     }
