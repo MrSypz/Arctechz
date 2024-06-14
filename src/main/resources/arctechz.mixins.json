@@ -7,10 +7,7 @@
     "backslot.PlayerInventoryMixin",
     "backslot.PlayerScreenHandlerMixin",
     "backslot.ServerPlayNetworkHandlerMixin",
-    "backslot.TridentItemMixin",
-    "featureMerge.HopperBlockEntityMixin",
-    "featureMerge.ItemEntityMixin",
-    "featureMerge.LivingEntityMixin"
+    "backslot.TridentItemMixin"
   ],
   "client": [
     "backslot.client.CreativeInventoryScreenMixin",
@@ -19,7 +16,6 @@
     "backslot.client.InventoryScreenMixin",
     "backslot.client.MinecraftClientMixin",
     "backslot.client.PlayerEntityRendererMixin",
-    "featureMerge.client.ItemEntityRendererMixin",
     "util.CreativeSlotAccessor"
   ],
   "injectors": {
