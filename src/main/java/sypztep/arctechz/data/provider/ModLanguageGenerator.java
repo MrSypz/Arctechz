@@ -18,17 +18,10 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
         addcallbackslot(translationBuilder,"Fail to drop backslot item switch to main hand first!");
 
         addconfig(translationBuilder,"title","Arctechz Main");
-        addconfig(translationBuilder,"featureMerge","Entity Merge Feature");
-        addconfig(translationBuilder,"featureItemMerge","Item Merge Feature");
-        addconfig(translationBuilder,"clientItemRender","Render Item Name");
-        addconfig(translationBuilder,"stackSize","Max Merge Size");
-        addconfig(translationBuilder,"mergeRange","Max Merge Range");
         addconfig(translationBuilder,"cosmetics","Cosmetics");
         addconfig(translationBuilder,"enum.CosmeticsOptions.ENABLE","Enable");
         addconfig(translationBuilder,"enum.CosmeticsOptions.FIRST_PERSON","First Person");
         addconfig(translationBuilder,"enum.CosmeticsOptions.DISABLE","Disable");
-        addconfig(translationBuilder,"category.client","Arctechz Client Side");
-        addconfig(translationBuilder,"viewItemDistance","viewItemDistance");
         addkeycategory(translationBuilder, "Arctechz");
         addkeybind(translationBuilder,"select_weapon","Select Weapon");
         addkeybind(translationBuilder,"swap_weapon","Swap Weapon");
