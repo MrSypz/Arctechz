@@ -1,4 +1,4 @@
-package sypztep.arctechz.data;
+package sypztep.arctechz.data.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -9,7 +9,7 @@ import sypztep.arctechz.Arctechz;
 import java.util.concurrent.CompletableFuture;
 
 public class ModLanguageGenerator extends FabricLanguageProvider  {
-    protected ModLanguageGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public ModLanguageGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(dataOutput, registryLookup);
     }
 
@@ -18,7 +18,9 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
         addcallbackslot(translationBuilder,"Fail to drop backslot item switch to main hand first!");
 
         addconfig(translationBuilder,"title","Arctechz Main");
-        addconfig(translationBuilder,"featureMerge","Merge Feature");
+        addconfig(translationBuilder,"featureMerge","Entity Merge Feature");
+        addconfig(translationBuilder,"featureItemMerge","Item Merge Feature");
+        addconfig(translationBuilder,"clientItemRender","Render Item Name");
         addconfig(translationBuilder,"stackSize","Max Merge Size");
         addconfig(translationBuilder,"mergeRange","Max Merge Range");
         addconfig(translationBuilder,"cosmetics","Cosmetics");
@@ -44,7 +46,7 @@ public class ModLanguageGenerator extends FabricLanguageProvider  {
         translationBuilder.add("key."+ Arctechz.MODID + "." + configname,message);
     }
     private static void addkeycategory(TranslationBuilder translationBuilder,String message) {
-        translationBuilder.add("key.categories" + Arctechz.MODID ,message);
+        translationBuilder.add("key.categories." + Arctechz.MODID ,message);
     }
     private static void addentity(TranslationBuilder translationBuilder,String configname,String message) {
         translationBuilder.add("entity."+ Arctechz.MODID + "." + configname,message);
