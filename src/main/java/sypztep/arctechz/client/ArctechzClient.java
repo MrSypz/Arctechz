@@ -13,7 +13,6 @@ import net.minecraft.util.ActionResult;
 import org.lwjgl.glfw.GLFW;
 import sypztep.arctechz.Arctechz;
 import sypztep.arctechz.client.event.BackSlotEvent;
-import sypztep.arctechz.client.payload.EnforceConfigMatchPayload;
 import sypztep.arctechz.client.payload.HandleDropSlotPayload;
 import sypztep.arctechz.client.render.entity.RavenEntityRenderer;
 import sypztep.arctechz.common.init.ModEntityTypes;
@@ -37,6 +36,5 @@ public class ArctechzClient implements ClientModInitializer {
     }
     private void initPayloads() {
         ClientPlayNetworking.registerGlobalReceiver(HandleDropSlotPayload.ID, new HandleDropSlotPayload.Receiver());
-        ClientPlayNetworking.registerGlobalReceiver(EnforceConfigMatchPayload.ID, new EnforceConfigMatchPayload.Receiver());
     }
 }

@@ -4,7 +4,6 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class ModConfig extends MidnightConfig {
     @Entry
-    public static boolean featureMerge = false;
     public static CosmeticsOptions cosmetics = CosmeticsOptions.ENABLE;
 
     public static boolean shouldDisplayCosmetics() {
