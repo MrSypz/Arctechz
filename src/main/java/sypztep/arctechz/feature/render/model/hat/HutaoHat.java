@@ -1,6 +1,4 @@
-package sypztep.arctechz.feature.render.model.hat;// Made with Blockbench 4.10.2
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
+package sypztep.arctechz.feature.render.model.hat;
 
 
 import net.minecraft.client.model.*;
