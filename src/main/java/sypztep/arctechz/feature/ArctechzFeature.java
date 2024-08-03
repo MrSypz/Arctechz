@@ -19,6 +19,7 @@ import sypztep.arctechz.feature.render.feature.BackFeatureRenderer;
 import sypztep.arctechz.feature.render.feature.OverheadFeatureRenderer;
 import sypztep.arctechz.feature.render.model.hat.BigHaloModel;
 import sypztep.arctechz.feature.render.model.hat.FurinaHatModel;
+import sypztep.arctechz.feature.render.model.hat.FurinaHatOldModel;
 import sypztep.arctechz.feature.render.model.hat.HutaoHat;
 
 
@@ -38,6 +39,7 @@ public class ArctechzFeature implements ClientModInitializer {
         LoadData.loadPlayerCosmetics();
         //OverHead Model
         EntityModelLayerRegistry.registerModelLayer(BigHaloModel.MODEL_LAYER, BigHaloModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(FurinaHatOldModel.MODEL_LAYER, FurinaHatOldModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(FurinaHatModel.MODEL_LAYER, FurinaHatModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
 
@@ -56,6 +58,7 @@ public class ArctechzFeature implements ClientModInitializer {
                 .put("hanega_big_halo", new OverheadData(BigHaloModel::new, "hanega_big_halo"))
                 .put("redsight_big_halo", new OverheadData(BigHaloModel::new, "redsight_big_halo"))
                 .put("wnell_big_halo", new OverheadData(BigHaloModel::new, "wnell_big_halo"))
+                .put("furina_hat_old", new OverheadData(FurinaHatOldModel::new, "furina_hat_old"))
                 .put("furina_hat", new OverheadData(FurinaHatModel::new, "furina_hat"))
                 .put("hutao_hat", new OverheadData(HutaoHat::new, "hutao_hat"))
                 .build();
