@@ -42,6 +42,8 @@ public class ArctechzFeature implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(FurinaHatModel.MODEL_LAYER, FurinaHatModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(FuanaModel.MODEL_LAYER, FuanaModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(VastoModel.MODEL_LAYER, VastoModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(TingyunEarsModel.MODEL_LAYER, TingyunEarsModel::getTexturedModelData);
         //BackItem Model
         EntityModelLayerRegistry.registerModelLayer(TingyunTailCapeModel.MODEL_LAYER, TingyunTailCapeModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(TingyunTailModel.MODEL_LAYER, TingyunTailModel::getTexturedModelData);
@@ -60,6 +62,8 @@ public class ArctechzFeature implements ClientModInitializer {
                 .put("furina_hat", new OverheadData(FurinaHatModel::new, "furina_hat"))
                 .put("hutao_hat", new OverheadData(HutaoHat::new, "hutao_hat"))
                 .put("fuana_atler" , new OverheadData(FuanaModel::new, "fuana_atler"))
+                .put("vasto_mask", new OverheadData(VastoModel::new, "vasto_mask"))
+                .put("tingyun_ears", new OverheadData(TingyunEarsModel::new, "tingyun_ears"))
                 .build();
         //BackItem
         BACKCOSMETIC_DATA = ImmutableMap.<String, BackData>builder()
