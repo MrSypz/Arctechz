@@ -40,7 +40,6 @@ public class ArctechzFeature implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(FurinaHatModel.MODEL_LAYER, FurinaHatModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(FuanaModel.MODEL_LAYER, FuanaModel::getTexturedModelData);
-
         //BackItem Model
 //        EntityModelLayerRegistry.registerModelLayer(EuraCapeModel.MODEL_LAYER, EuraCapeModel::getTexturedModelData);
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
