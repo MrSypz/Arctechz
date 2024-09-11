@@ -17,6 +17,8 @@ import sypztep.arctechz.feature.data.PlayerCosmeticData;
 import sypztep.arctechz.feature.init.LoadData;
 import sypztep.arctechz.feature.render.feature.BackFeatureRenderer;
 import sypztep.arctechz.feature.render.feature.OverheadFeatureRenderer;
+import sypztep.arctechz.feature.render.model.back.TingyunTailModel;
+import sypztep.arctechz.feature.render.model.back.TingyunTailCapeModel;
 import sypztep.arctechz.feature.render.model.hat.*;
 
 
@@ -41,7 +43,8 @@ public class ArctechzFeature implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(FuanaModel.MODEL_LAYER, FuanaModel::getTexturedModelData);
         //BackItem Model
-//        EntityModelLayerRegistry.registerModelLayer(EuraCapeModel.MODEL_LAYER, EuraCapeModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(TingyunTailCapeModel.MODEL_LAYER, TingyunTailCapeModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(TingyunTailModel.MODEL_LAYER, TingyunTailModel::getTexturedModelData);
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
                 @SuppressWarnings("unchecked") var playerRenderer = (FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer;
@@ -60,7 +63,8 @@ public class ArctechzFeature implements ClientModInitializer {
                 .build();
         //BackItem
         BACKCOSMETIC_DATA = ImmutableMap.<String, BackData>builder()
-//                .put("eura_cape", new BackData(EuraCapeModel::new, "eura_cape"))
+                .put("tingyun_tail_cape", new BackData(TingyunTailCapeModel::new, "tingyun_tail_cape"))
+                .put("tingyun_tail", new BackData(TingyunTailModel::new, "tingyun_tail_cape"))
                 .build();
     }
 }
