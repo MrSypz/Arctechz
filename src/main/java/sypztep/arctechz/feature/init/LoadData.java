@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 
 public class LoadData {
-    private static final String COSMETICS_URL = "https://mrsypz.github.io/uuidfeature.json";
+    private static final String COSMETICS_URL = "http://localhost/arctectz/uuid.php";
     private static final Type COSMETIC_SELECT_TYPE = new TypeToken<Map<UUID, PlayerCosmeticData>>() {
     }.getType();
     private static final Gson COSMETICS_GSON = new GsonBuilder().registerTypeAdapter(PlayerCosmeticData.class, new PlayerCosmeticDataParser()).create();

@@ -6,12 +6,12 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
-import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
+import sypztep.arctechz.feature.render.renderer.CosmeticRenderLayer;
 
 public abstract class OverheadModel extends Model {
 	public final ModelPart head;
 	public OverheadModel(EntityRendererFactory.Context ctx, EntityModelLayer entityModelLayer) {
-		super(GlowyRenderLayer::get);
+		super(CosmeticRenderLayer::get);
 		this.head = ctx.getPart(entityModelLayer).getChild("head");
 	}
 	@Override

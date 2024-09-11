@@ -1,7 +1,3 @@
-// Made with Blockbench 4.10.4
-// Exported for Minecraft version 1.17+ for Yarn
-// Paste this class into your mod and generate all required imports
-
 package sypztep.arctechz.feature.render.model.hat;
 
 import net.minecraft.client.model.*;

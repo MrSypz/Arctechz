@@ -44,6 +44,7 @@ public class ArctechzFeature implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
 
         //BackItem Model
+//        EntityModelLayerRegistry.registerModelLayer(EuraCapeModel.MODEL_LAYER, EuraCapeModel::getTexturedModelData);
 
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
@@ -57,15 +58,13 @@ public class ArctechzFeature implements ClientModInitializer {
         OVERHEADS_DATA = ImmutableMap.<String, OverheadData>builder()
                 .put("hanega_big_halo", new OverheadData(BigHaloModel::new, "hanega_big_halo"))
                 .put("redsight_big_halo", new OverheadData(BigHaloModel::new, "redsight_big_halo"))
-                .put("wnell_big_halo", new OverheadData(BigHaloModel::new, "wnell_big_halo"))
                 .put("furina_hat_old", new OverheadData(FurinaHatOldModel::new, "furina_hat_old"))
                 .put("furina_hat", new OverheadData(FurinaHatModel::new, "furina_hat"))
                 .put("hutao_hat", new OverheadData(HutaoHat::new, "hutao_hat"))
                 .build();
         //BackItem
         BACKCOSMETIC_DATA = ImmutableMap.<String, BackData>builder()
+//                .put("eura_cape", new BackData(EuraCapeModel::new, "eura_cape"))
                 .build();
-
     }
-
 }

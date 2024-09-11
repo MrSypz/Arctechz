@@ -2,6 +2,7 @@ package sypztep.arctechz.feature.render.feature;
 
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -13,7 +14,6 @@ import sypztep.arctechz.ModConfig;
 import sypztep.arctechz.feature.ArctechzFeature;
 import sypztep.arctechz.feature.data.PlayerCosmeticData;
 import sypztep.arctechz.feature.render.model.hat.OverheadModel;
-import sypztep.arctechz.feature.render.renderer.GlowyRenderLayer;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,7 +42,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 					model.head.pivotY = this.getContextModel().head.pivotY;
 					model.head.pitch = this.getContextModel().head.pitch;
 					model.head.yaw = this.getContextModel().head.yaw;
-					model.render(matrices, vertexConsumers.getBuffer(GlowyRenderLayer.get(texture)), 15728880, OverlayTexture.DEFAULT_UV);
+					model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), 0xF000F0, OverlayTexture.DEFAULT_UV);
 				}
 			}
 		}
