@@ -42,7 +42,7 @@ public class OverheadFeatureRenderer extends FeatureRenderer<AbstractClientPlaye
 					model.head.pivotY = this.getContextModel().head.pivotY;
 					model.head.pitch = this.getContextModel().head.pitch;
 					model.head.yaw = this.getContextModel().head.yaw;
-					model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), 0xF000F0, OverlayTexture.DEFAULT_UV);
+					model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), light, OverlayTexture.DEFAULT_UV);
 				}
 			}
 		}

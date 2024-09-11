@@ -17,10 +17,7 @@ import sypztep.arctechz.feature.data.PlayerCosmeticData;
 import sypztep.arctechz.feature.init.LoadData;
 import sypztep.arctechz.feature.render.feature.BackFeatureRenderer;
 import sypztep.arctechz.feature.render.feature.OverheadFeatureRenderer;
-import sypztep.arctechz.feature.render.model.hat.BigHaloModel;
-import sypztep.arctechz.feature.render.model.hat.FurinaHatModel;
-import sypztep.arctechz.feature.render.model.hat.FurinaHatOldModel;
-import sypztep.arctechz.feature.render.model.hat.HutaoHat;
+import sypztep.arctechz.feature.render.model.hat.*;
 
 
 public class ArctechzFeature implements ClientModInitializer {
@@ -42,11 +39,10 @@ public class ArctechzFeature implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(FurinaHatOldModel.MODEL_LAYER, FurinaHatOldModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(FurinaHatModel.MODEL_LAYER, FurinaHatModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HutaoHat.MODEL_LAYER, HutaoHat::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(FuanaModel.MODEL_LAYER, FuanaModel::getTexturedModelData);
 
         //BackItem Model
 //        EntityModelLayerRegistry.registerModelLayer(EuraCapeModel.MODEL_LAYER, EuraCapeModel::getTexturedModelData);
-
-
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
                 @SuppressWarnings("unchecked") var playerRenderer = (FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>>) entityRenderer;
@@ -61,6 +57,7 @@ public class ArctechzFeature implements ClientModInitializer {
                 .put("furina_hat_old", new OverheadData(FurinaHatOldModel::new, "furina_hat_old"))
                 .put("furina_hat", new OverheadData(FurinaHatModel::new, "furina_hat"))
                 .put("hutao_hat", new OverheadData(HutaoHat::new, "hutao_hat"))
+                .put("fuana_atler" , new OverheadData(FuanaModel::new, "fuana_atler"))
                 .build();
         //BackItem
         BACKCOSMETIC_DATA = ImmutableMap.<String, BackData>builder()

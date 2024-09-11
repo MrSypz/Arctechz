@@ -43,12 +43,11 @@ public class BackFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
 					model.back.pitch = this.getContextModel().body.pitch;
 					model.back.yaw = this.getContextModel().body.yaw;
 
-					model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), 0xF000F0, OverlayTexture.DEFAULT_UV);
+					model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), light, OverlayTexture.DEFAULT_UV);
 				}
 			}
 		}
 	}
-
 
 	private record ResolveBackData(Identifier texture, BackCosmeticModel model) {
 	}
