@@ -122,7 +122,7 @@ public class RavenDeliverBundleGoal<T extends TameableEntity> extends Goal {
     }
 
     private boolean canTeleportTo(BlockPos pos) {
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType((MobEntity) this.world, pos.mutableCopy());
+        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(this.tameable, pos.mutableCopy());
         if (pathNodeType != PathNodeType.WALKABLE) {
             return false;
         } else {
