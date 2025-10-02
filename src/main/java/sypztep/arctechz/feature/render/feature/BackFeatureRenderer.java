@@ -35,8 +35,8 @@ public class BackFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
 
         PlayerCosmeticData cosmeticData = ArctechzFeature.getCosmeticData(entity);
-        if (ModConfig.shouldDisplayCosmetics() && cosmeticData != null && !entity.isInvisible()) {
-            String playerBackData = cosmeticData.getBack();
+//        if (ModConfig.shouldDisplayCosmetics() && cosmeticData != null && !entity.isInvisible()) {
+            String playerBackData = "tingyun_tail";
             if (playerBackData != null) {
                 ResolveBackData resolveBackData = this.models.get(playerBackData);
                 if (resolveBackData != null) {
@@ -44,8 +44,10 @@ public class BackFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
                     Identifier texture = resolveBackData.texture();
                     BackCosmeticModel model = resolveBackData.model();
 
-                    if (model instanceof WiggleFeature) {
-                        float currentWiggleAmount = getCurrentWiggleAmount(entity);
+                    if (model instanceof WiggleFeature wiggleModel) {
+                        wiggleModel.applyTailPhysics(entity, tickDelta); // Changed method name
+
+                        float currentWiggleAmount = getCurrentWiggleAmount(entity, tickDelta);
                         float q = 0;
                         float t = MathHelper.lerp(tickDelta, entity.prevStrideDistance, entity.strideDistance);
                         q += MathHelper.sin(MathHelper.lerp(tickDelta, entity.prevHorizontalSpeed, entity.horizontalSpeed) * 2.0f) * 3.0f * t;
@@ -68,18 +70,19 @@ public class BackFeatureRenderer extends FeatureRenderer<AbstractClientPlayerEnt
                         model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture)), light, OverlayTexture.DEFAULT_UV);
                     }
                 }
-            }
+//            }
         }
     }
 
-    private static float getCurrentWiggleAmount(AbstractClientPlayerEntity entity) {
+    private static float getCurrentWiggleAmount(AbstractClientPlayerEntity entity, float tickdelta) {
         float previousWiggleAmount = 0.0f;
-        long gameTime = entity.getWorld().getTime();
+        float time = (entity.age + tickdelta); // รวม tick + partial tick
+
         float wiggleIntensity = 1.5f + Math.min(entity.getHealth() * 0.1f, 2);
         float wiggleSpeed = 0.1f;
-        float targetWiggleAmount = MathHelper.sin(gameTime * wiggleSpeed) * wiggleIntensity;
+        float targetWiggleAmount = MathHelper.sin(time * wiggleSpeed) * wiggleIntensity;
 
-        float lerpSpeed = 0.1f;
+        float lerpSpeed = 0.05f;
         return MathHelper.lerp(lerpSpeed, previousWiggleAmount, targetWiggleAmount);
     }
 
